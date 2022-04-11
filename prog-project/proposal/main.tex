@@ -1,0 +1,331 @@
+\documentclass{article}[12pt]         % Alternatives include: article, report, book slides, letter
+\usepackage[a4paper,left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry} 
+\usepackage[utf8]{inputenc}     % The package translates various standard and other input encodings into a ‘LaTeX internal language’. utf8 is standard in programming.
+\usepackage{tikz}               % PGF is a macro package for creating graphics
+\usepackage{wrapfig}            % Allows figures or tables to have text wrapped around them. Does not work in combination with list environments, but can be used in a parbox or minipage, and in twocolumn format.
+\usepackage{graphicx}           % Builds upon the graphics package, providing a key-value interface for optional arguments to the \includegraphics command. 
+\usepackage{amsmath}            % Provides tons of math symbols, like arrows, operators, special characters, geometric figures etc. 
+\usepackage{mathtools}          % Enhance the appearance of documents containing a lot of mathematics
+\usepackage{amssymb}            % Operators name and symbols for advanced math, like operators Equations numbering
+\usepackage{listings}           % For presentation of code / code snippets
+\usepackage{xcolor}             % Create new colors or use the pre-defined xcolor palate
+\usepackage{wasysym}            % Provides many glyphs like male and female symbols and astronomical symbols, as well as the complete lasy font set and other odds and ends
+\usepackage{xparse}             % Provides a high-level interface for producing document-level commands (\NewDocumentCommand{}{}{} for example)
+\usepackage{array}              % For fixing the lengths of the table
+\usepackage{tabularx}           % If the width of the entire table needs to be controlled - cells are spaced evenly
+\usepackage{ltablex}            % Modifies the tabularx environment to combine the features of the tabularx package (auto-sized columns in a fixed width table) with those of the longtable package (multi-page tables). 
+\usepackage{dsfont}             % Provides double stroked letters (double stroked R to express domain of real numbers for example)
+\usepackage{upgreek}            % Provides upright Greek letters
+\usepackage{enumitem}           % Provides user control over the layout of the three basic list environments: enumerate, itemize and description
+\usepackage{tcolorbox}          % For tcolorboxes (used for lemmas, theorems etc.)
+\usepackage{nameref}            % Let's you reference passages using words (creates hyperlink)
+\usepackage{hyperref}           % Let's you create hyperlinks from the table of contents, see \hypersetup for options
+\usepackage{subfiles}           % Used to include content of other .tex files in main
+\usepackage{soul}               % For \ul command which allows line breaks with underlined sentences
+\usepackage{titlesec}           % Every section starts on new page, but more options are available from this package in the end
+\usepackage{imakeidx}           % Used for making indices with most important words, \index command is enabled
+\usepackage{adjustbox}          % With this, you can resize only if the table goes beyond \textwidth, otherwise not.
+\usepackage{arydshln}           % For dashed lines within arrays/tables (instead of \hline)
+\usepackage{titling}            % Used for the subtitle command below
+
+\newsavebox\affbox
+
+
+
+\tcbuselibrary{theorems}
+
+\hypersetup{bookmarks=true,
+    unicode=false,
+    pdftoolbar=true,
+    pdfmenubar=true,
+    pdffitwindow=false,
+    pdfstartview={FitH},
+    pdfborder = {0 0 0},
+    pdfnewwindow=true,
+    colorlinks=false,
+    linkcolor=black,
+    citecolor=green,
+    filecolor=magenta,
+    }
+   % urlcolor=blue 
+   % pdftitle={My title},
+   % pdfauthor={Author},
+   % pdfsubject={Subject},
+   % pdfcreator={Creator},
+   % pdfproducer={Producer},
+   % pdfkeywords={keyword1} {key2} {key3},
+    
+% https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_hyperref
+
+%---------------------------------------------------%
+% General Settings and Document Formatting
+%---------------------------------------------------%
+
+% Images can be saved in a different folder
+\graphicspath{{img/}} 
+
+% Color Settings
+\definecolor{ForestGreen}{RGB}{24, 135, 54}
+\definecolor{DarkRed}{HTML}{B51515}
+\definecolor{CherryRed}{HTML}{D4232C}
+\definecolor{Orange}{HTML}{FF6E0F}
+\definecolor{OceanBlue}{cmyk}{1.0,0.7,0,0} %\definecolor{OceanBlue}{RGB}{0, 77, 255}
+\definecolor{TacticalGreen}{RGB}{104, 159, 110}
+\colorlet{LightBlue}{OceanBlue!20!white}
+\colorlet{DarkBlue}{OceanBlue!80!black!20}
+
+% Settings for Labels that are used in nested itemize sections
+    % 1st label will be a dash
+        % 2nd label a bullet
+            % 3rd label a dot
+\renewcommand{\labelitemi}{\textendash}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\cdot$}
+
+% Line Spacing
+\renewcommand{\baselinestretch}{1}
+
+% (Horizontal) Indentation following a paragraph
+\setlength{\parindent}{0em}
+
+% Vertical distance after a paragraph
+\setlength{\parskip}{10pt}
+
+% Line Spacing for Arrays, tables
+\renewcommand{\arraystretch}{1.5}
+
+% Spacing above and below math formulas using $$ xyz $$ 
+            %--- Uncomment in order to use ---%
+% \setlength{\abovedisplayskip}{0pt}
+% \setlength{\belowdisplayskip}{0pt}
+
+% Settings for table of contents (how many levels are shown on it?)
+            %--- Uncomment in order to use ---%
+\setcounter{tocdepth}{1} % Show sections
+\setcounter{tocdepth}{2} % + subsections
+\setcounter{tocdepth}{3} % + subsubsections
+% \setcounter{tocdepth}{4} % + paragraphs
+% \setcounter{tocdepth}{5} % + subparagraphs
+
+% Every \section appears on a new page, from package titlesec
+% \newcommand{\sectionbreak}{\clearpage}
+
+% Links images directory to document
+\graphicspath{{img/}}
+
+%---------------------------------------------------%
+% Environments and New commands
+%---------------------------------------------------%
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%---
+% Commands
+%---
+% Shorthand to insert picture, just change the name the picture has to have under "\includegraphics"
+\NewDocumentCommand{\img}{O{}O{150}O{}O{}}{
+    \vspace{-10pt}
+    \begin{figure}[h!]
+        \centering
+        \caption{\textit{#3}}
+        \label{fig:#4}
+        \includegraphics[width=#2 mm]{Inv_#1.png}
+    \end{figure}
+    \vspace{-10pt}}
+
+\NewDocumentCommand{\norm}{O{}O{2}}{\Vert #1 \Vert_{#2}}
+\NewDocumentCommand{\fnorm}{O{}}{$\Vert #1 \Vert_F$}
+
+% For any distribution with two moments
+\NewDocumentCommand{\Distribution}{+O{default} +m +m}{%
+    $\mathcal{#1}( #2 \mid #3)$%
+    }
+
+% Math Fraction but with text
+\NewDocumentCommand{\textfrac}{O{}O{}}{\frac{\text{#1}}{\text{#2}}}
+% Bold Text
+\NewDocumentCommand{\bt}{O{}}{\textbf{#1}}
+% Math Bold Text
+\NewDocumentCommand{\bm}{O{}}{\mathbf{#1}}
+% Nicer red
+\NewDocumentCommand{\red}{O{}}{\textcolor{DarkRed}{#1}}
+% Nicer green
+\NewDocumentCommand{\green}{O{}}{\textcolor{ForestGreen}{#1}}
+% Highlighter
+\NewDocumentCommand{\hly}{ O{}}{\colorbox{yellow}{#1}}
+% For citing a script
+% \NewDocumentCommand{\ct}{O{}}{\begin{center} In script: #1\end{center}}
+% For citing a script/lecture and page
+% \NewDocumentCommand{\cts}{O{}O{}}{\texttt{\green[Script/Lecture: #1, Page: #2]}}
+% For citing a book and page
+% \NewDocumentCommand{\ctbook}{O{}}{\begin{center} See "insert book 1 here" Page: #1\end{center}}
+% For citing a lecture and a timestamp
+% \NewDocumentCommand{\ctl}{O{}O{}}{\texttt{\green[Lecture #1, Timestamp: [#2]]}}
+
+\newcommand{\tens}{%
+  \mathbin{\mathop{\otimes}}%
+}
+\newcommand{\scriptO}{\mathcal{O}}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\trans}{^{\mathsf{T}}}
+\newcommand{\herm}{^{\mathsf{H}}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\range}{\mathcal{R}}
+\newcommand{\nul}{\mathcal{N}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\La}{\Leftarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\LRa}{\Leftrightarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\sigmasqrd}{\sigma^{2}}
+\newcommand{\ProbP}{\mathds{P}}
+\newcommand{\chisqrd}{\upchi^{2}}
+\newcommand{\ExpV}{\mathds{E}}
+\newcommand{\epsiloni}{\epsilon_i}
+\newcommand{\varsign}{\mathds{V}}
+\newcommand{\normN}{\mathcal{N}}
+\newcommand{\Rsqrd}{R^{2}}
+\newcommand{\AdjRsqrd}{\Bar{R}^{2}}
+\newcommand{\NormDist}{\mathcal{N}(0,1)}
+\newcommand{\varsignAR}{\mathds{V}ar}
+\newcommand{\Cov}{\mathds{C}ov}
+\newcommand{\el}{\mathcal{\ell}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}{\LARGE #1} \end{center}
+    \vskip0.5em}%
+}
+
+%---
+% List Settings
+%---
+
+% Itemize Settings
+\setlist[itemize]{itemsep=0pt, topsep=0pt, partopsep = 0pt, parsep = 0pt, leftmargin = 0.4cm}
+
+% Enumerate Settings
+\setlist[enumerate]{itemsep=0pt, topsep=0pt, partopsep = 0pt, parsep = 0pt, leftmargin = 0.6cm}
+
+% Number List 
+\newlist{numberlist}{enumerate}{1}
+\setlist[numberlist, 1]{label={\arabic*.}, itemsep=0em, leftmargin=*,labelindent=0.5em}
+
+% Equation List 
+\newlist{eqlist}{enumerate}{1}
+\setlist[eqlist, 1]{label={(\roman*)},itemsep=-0.2em, leftmargin=*,labelindent=-0.5em}
+
+% Bullet List 
+\newlist{bulletlist}{itemize}{1}
+\setlist[bulletlist, 1]{itemsep=0em, leftmargin=0.5em, label={·}}
+
+% Separator List 
+\newlist{seplist}{itemize}{1}
+\setlist[seplist, 1]{itemsep=0em, leftmargin=0.5em, label={\textendash}}
+
+% Globally makes itemize have no line spacing
+\setlist[itemize]{itemsep=1pt, topsep=0pt}  
+
+% Globally makes enumerate have no line spacing
+\setlist[enumerate]{nosep, topsep=0pt} 
+
+%---
+% Theorems, Lemmas etc.
+%---
+
+\newtcbtheorem[number within=section, list inside={myformulas}]{definition}{Formula}% For the Formula boxes
+{colback=green!5,
+colframe=green!35!black,
+fonttitle=\bfseries}{th}
+
+\newtcbtheorem[number within=section, list inside={mylist}]{theorem}{Theorem}% For the theorem boxes
+{colback=blue!5,
+colframe=blue!35!black,
+fonttitle=\bfseries}{th}
+
+\newtcbtheorem[number within=section, list inside={mylist}]{generaldefinition}{General Definition}% For the Quote
+{colback=yellow!20,
+colframe=yellow!70!black,
+fonttitle=\bfseries}{th}
+
+\newtcbtheorem[number within=section]{quoting}{Quote}% For the Quote
+{colback=yellow!20,
+colframe=yellow!70!black,
+fonttitle=\bfseries,
+fontupper=\itshape}{th}
+
+\newtcbtheorem[number within=section, list inside={mylist}]{intuition}{Intuition}% For the Quote
+{colback=BlueLUH!5!white,
+colframe=BlueLUH!100!black!50,
+fonttitle=\bfseries}{th}
+
+\makeindex[columns=2, title=Alphabetical Index, 
+           options= -s Template_Index.ist,
+           intoc]
+
+
+%---
+% Main Document
+%---
+
+\title{Advanced Programming 2022}
+\subtitle{Migros Project Proposal}
+
+\usepackage{authblk}            % Redefines the \author command to work as normal or to allow a footnote style of author/affiliation input
+\author[1]{Zoé \textsc{Giacomi}}
+\author[2]{Gino \textsc{Mazzoni}}
+\author[3]{Alexander \textsc{Semionov}}
+
+\affil[1,2,3]{Université de Lausanne, Faculté des Hautes Études Commerciales}
+\affil[1]{zoe.giacomi@unil.ch}
+\affil[2]{gino.mazzoni@unil.ch}
+\affil[3]{alexander.semionov@unil.ch}
+
+
+
+
+\date{April 2022}
+
+\begin{document}
+
+
+\maketitle 
+% \tableofcontents
+
+
+
+% Optional Titlepage
+% \subfile{titlepage.tex}
+
+\subfile{00.tex}
+% \subfile{01.tex}
+% \subfile{02.tex}
+% \subfile{03.tex}
+% \subfile{04.tex}
+% \subfile{05.tex}
+% \subfile{06.tex}
+% \subfile{07.tex}
+% \subfile{08.tex}
+% \subfile{09.tex}
+% \subfile{10.tex}
+% \subfile{11.tex}
+% \subfile{12.tex}
+% \subfile{13.tex}
+% \subfile{14.tex}
+
+
+% \printindex
+% \bibliographystyle{plain}
+% \bibliography{References}
+
+\end{document}

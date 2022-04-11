@@ -1,0 +1,31 @@
+\documentclass[main]{subfiles} 
+\graphicspath{{img/}}
+
+
+\begin{document}
+
+
+\subsection*{Aim}
+
+The aim of this project is to build a platform from which the current prices, availability and origin of products offered at the swiss retailer Migros can be displayed.
+
+Efficiently obtaining the data, ordering and storing it in a (computationally) efficient manner will be a major focus of this project. 
+The platform should be able to quickly give information on prices, 
+availability and stock levels of a selected product based on the  ZIP code (for example). 
+This platform will also be used for further analysis in the project for the course "Advanced Data Analysis"
+
+% Using the knowledge obtained from the course "Advanced Data Analysis" we mainly aim to produce the backend 
+
+
+
+\subsection*{Data}
+The data will be obtained mainly by scraping the website of Migros.
+We aim to build a small database which is kept up-to-date regularly so that a (short term) time series can be constructed.
+Within the scope of this project is also the maintenance of the data so that the project in "Advanced Data Analysis" can focus on just that: analysing the scraped data. 
+Depending on how well-maintained the API of Migros is and whether we are granted access, the API will be consulted as well.
+
+Due to swiss regulation Migros is obliged to declare the place of origin, sometimes including a unique identification of the producer, of their animal products. 
+We especially want to obtain this data in order to advance the project in "Advanced Data Analysis".
+
+
+\end{document}
