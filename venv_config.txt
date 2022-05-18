@@ -26,3 +26,5 @@ pip3 install selenium
 pip3 install webdriver-manager
 pip3 install lxml
 pip3 install openpyxl
+pip3 install scrapy
+pip3 install tk

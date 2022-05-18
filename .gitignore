@@ -190,3 +190,9 @@ dmypy.json
 *.exe
 *.o
 *.so
+zoe-computer-sucks/
+zoe-computer-sucks
+zoe-computer-sucks/main.py
+zoe-computer-sucks/comparis-data-sample.xlsx
+
+Basicspidercomparis

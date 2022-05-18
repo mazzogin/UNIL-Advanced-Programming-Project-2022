@@ -6,9 +6,15 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
 
+from comparis.items import PropertyItem
+from scrapy.loader import ItemLoader
+
 # https://fr.comparis.ch/immobilien/result/list?requestobject=%7B%22DealType%22%3A20%2C%22SiteId%22%3A0%2C%22RootPropertyTypes%22%3A%5B%5D%2C%22PropertyTypes%22%3A%5B%5D%2C%22RoomsFrom%22%3Anull%2C%22RoomsTo%22%3Anull%2C%22FloorSearchType%22%3A0%2C%22LivingSpaceFrom%22%3Anull%2C%22LivingSpaceTo%22%3Anull%2C%22PriceFrom%22%3Anull%2C%22PriceTo%22%3Anull%2C%22ComparisPointsMin%22%3A0%2C%22AdAgeMax%22%3A0%2C%22AdAgeInHoursMax%22%3Anull%2C%22Keyword%22%3A%22%22%2C%22WithImagesOnly%22%3Anull%2C%22WithPointsOnly%22%3Anull%2C%22Radius%22%3A%2210%22%2C%22MinAvailableDate%22%3A%221753-01-01T00%3A00%3A00%22%2C%22MinChangeDate%22%3A%221753-01-01T00%3A00%3A00%22%2C%22LocationSearchString%22%3A%22Lausanne%22%2C%22Sort%22%3A3%2C%22HasBalcony%22%3Afalse%2C%22HasTerrace%22%3Afalse%2C%22HasFireplace%22%3Afalse%2C%22HasDishwasher%22%3Afalse%2C%22HasWashingMachine%22%3Afalse%2C%22HasLift%22%3Afalse%2C%22HasParking%22%3Afalse%2C%22PetsAllowed%22%3Afalse%2C%22MinergieCertified%22%3Afalse%2C%22WheelchairAccessible%22%3Afalse%2C%22LowerLeftLatitude%22%3Anull%2C%22LowerLeftLongitude%22%3Anull%2C%22UpperRightLatitude%22%3Anull%2C%22UpperRightLongitude%22%3Anull%7D
 # https://fr.comparis.ch/immobilien/marktplatz/details/show/27854674
 # https://fr.comparis.ch/immobilien/marktplatz/details/show/27851872
+
+# The one I used for my successful try
+# 'https://www.comparis.ch/immobilien/marktplatz/lausanne/kaufen?sort=11'
 
 # Xpath to every link //a[@class='css-a0dqn4 ehesakb1']
 
@@ -20,8 +26,9 @@ from scrapy.linkextractors import LinkExtractor
 # m2 (//p[@class='css-1ush3w6 ehesakb2']/span[last()])[4]
 # Construction_Year (//p[@class='css-1ush3w6 ehesakb2']/span[last()])[5]
 # Available From (//p[@class='css-1ush3w6 ehesakb2']/span[last()])[6]
+
 # Address //h5[@class='css-15z12tn ehesakb2']
-# Price //h3[@class='css-eujsoq ehesakb2']
+# Price //h3[@class="css-eujsoq ehesakb2"]
 
 # json containing all the data: //script[@type="application/json"]
 
@@ -29,7 +36,8 @@ from scrapy.linkextractors import LinkExtractor
 class RealEstateSpider(CrawlSpider):
     name = 'real-estate'
     allowed_domains = ['comparis.ch']
-    start_urls = ['https://www.comparis.ch/immobilien/marktplatz/lausanne/kaufen?sort=11']
+    start_urls = ['https://www.comparis.ch/immobilien/result/list?requestobject=%7B%22DealType%22%3A20%2C%22SiteId%22%3A0%2C%22RootPropertyTypes%22%3A%5B%5D%2C%22PropertyTypes%22%3A%5B%5D%2C%22RoomsFrom%22%3Anull%2C%22RoomsTo%22%3Anull%2C%22FloorSearchType%22%3A0%2C%22LivingSpaceFrom%22%3Anull%2C%22LivingSpaceTo%22%3Anull%2C%22PriceFrom%22%3Anull%2C%22PriceTo%22%3Anull%2C%22ComparisPointsMin%22%3A0%2C%22AdAgeMax%22%3A0%2C%22AdAgeInHoursMax%22%3Anull%2C%22Keyword%22%3A%22%22%2C%22WithImagesOnly%22%3Anull%2C%22WithPointsOnly%22%3Anull%2C%22Radius%22%3Anull%2C%22MinAvailableDate%22%3A%221753-01-01T00%3A00%3A00%22%2C%22MinChangeDate%22%3A%221753-01-01T00%3A00%3A00%22%2C%22LocationSearchString%22%3A%228005%22%2C%22Sort%22%3A11%2C%22HasBalcony%22%3Afalse%2C%22HasTerrace%22%3Afalse%2C%22HasFireplace%22%3Afalse%2C%22HasDishwasher%22%3Afalse%2C%22HasWashingMachine%22%3Afalse%2C%22HasLift%22%3Afalse%2C%22HasParking%22%3Afalse%2C%22PetsAllowed%22%3Afalse%2C%22MinergieCertified%22%3Afalse%2C%22WheelchairAccessible%22%3Afalse%2C%22LowerLeftLatitude%22%3Anull%2C%22LowerLeftLongitude%22%3Anull%2C%22UpperRightLatitude%22%3Anull%2C%22UpperRightLongitude%22%3Anull%7D&sort=11']
+    
 
     headers = {
         # Taken from url. Go to browser and enter url, then right click on website, inspect > Network > Request Headers, then copy and paste
@@ -57,17 +65,26 @@ class RealEstateSpider(CrawlSpider):
         }
 
     rules = (
-        Rule(LinkExtractor(allow='immobilien', deny='show')),
+        Rule(LinkExtractor(allow='details', deny='show')),
         Rule(LinkExtractor(allow='show'), callback='parse_item')
     )
  
     def parse_item(self, response):
-        yield {
-           'Type' : response.xpath('(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[1]').get(),
-           'Rooms' : response.xpath('(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[2]').get(),
-           'Floors' : response.xpath('(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[3]').get(),
-           'sq_meters' : response.xpath('(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[4]').get(),
-           'contruction_year' : response.xpath('(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[5]').get(),
-           'available_from' : response.xpath('(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[6]').get(),
-           'link' : response.url
-        }
+        l = ItemLoader(item = PropertyItem(), response = response)
+
+        #l.add_css('address', 'h5.css-15z12tn ehesakb2')
+        # >>> response.css('h5.css-15z12tn.ehesakb2::text').get()
+        # //h5[@class="css-15z12tn ehesakb2"]//text()').extract()[2]
+        # l.add_xpath('address', '//h5[@class="css-15z12tn ehesakb2"]//text()')
+        l.add_css('address', 'h5.css-15z12tn.ehesakb2')
+        # l.add_xpath('address', '(//span[@class="css-1y5nuta ehesakb5"])[3]/text()')
+        l.add_xpath('price', '//h3[@class="css-eujsoq ehesakb2"]')
+        l.add_xpath('type', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[1]')
+        l.add_xpath('rooms', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[2]')
+        l.add_xpath('floors', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[3]')
+        l.add_xpath('sq_meters', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[4]')
+        l.add_xpath('contruction_year', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[5]')
+        l.add_xpath('available_from', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[6]')
+
+
+        yield l.load_item()
