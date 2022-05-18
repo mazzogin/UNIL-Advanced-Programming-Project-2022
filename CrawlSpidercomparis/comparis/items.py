@@ -12,7 +12,7 @@ def remove_string(value):
     return value.replace('.css-ykqdxu{cursor:inherit;}.css-1y5nuta{box-sizing:border-box;margin-right:0.8rem;cursor:inherit;}','').strip()
 
 def remove_string_currency(value):
-    return value.replace('.css-1my9a6m{box-sizing:border-box;margin-left:0.4rem;font-size:1.4rem;font-weight:300;display:inline;}@media screen and (min-width: 46.25em){.css-1my9a6m{font-size:1.6rem;}}').strip()
+    return value.replace('.css-1my9a6m{box-sizing:border-box;margin-left:0.4rem;font-size:1.4rem;font-weight:300;display:inline;}@media screen and (min-width: 46.25em){.css-1my9a6m{font-size:1.6rem;}}','').strip()
 
 def remove_currency(value):
     return value.replace('CHF','').strip()
