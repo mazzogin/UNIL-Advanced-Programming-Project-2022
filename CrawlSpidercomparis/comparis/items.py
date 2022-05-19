@@ -39,14 +39,24 @@ def remove_comma(value):
     return value.replace(',','').strip()
 
 def parse_equipment(equipment):
+    """
+    If the string is found in the html, then 'True' will be inserted by the itemloader,
+    otherwise nothing will be inserted. 
+
+    The variables are either true or false, which makes this an effective method.
+    """
     return 'None' if equipment == None else True
 
-
+def remove_meters(value):
+    """
+    Removes the m string and and leaves only the number
+    """
+    return value.replace('m','').strip()
 
 
 
 class PropertyItem(scrapy.Item):
-    # define the fields for your item here like:
+    # Primary Information Fields
     address = scrapy.Field(
         input_processor = MapCompose(remove_tags, remove_string, remove_comma), 
         output_processor = Join())
@@ -79,6 +89,8 @@ class PropertyItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, remove_comma), 
         output_processor = TakeFirst())
     
+    # Equipement fields
+
     balcony =  scrapy.Field(
         input_processor = MapCompose(remove_tags, parse_equipment),
         output_processor = TakeFirst())
@@ -110,7 +122,32 @@ class PropertyItem(scrapy.Item):
     dryer  =  scrapy.Field(
         input_processor = MapCompose(remove_tags, parse_equipment),
         output_processor = TakeFirst())
+
+    # Further criteria fields
+
+    public_transp = scrapy.Field(
+        input_processor = MapCompose(remove_tags, remove_meters),
+        output_processor = TakeFirst())
     
+    highway = scrapy.Field(
+        input_processor = MapCompose(remove_tags, remove_meters),
+        output_processor = TakeFirst())
+
+    kindergarten = scrapy.Field(
+        input_processor = MapCompose(remove_tags, remove_meters),
+        output_processor = TakeFirst())
+
+    prim_school = scrapy.Field(
+        input_processor = MapCompose(remove_tags, remove_meters),
+        output_processor = TakeFirst())
+
+    secon_school = scrapy.Field(
+        input_processor = MapCompose(remove_tags, remove_meters),
+        output_processor = TakeFirst())
+
+    closest_shop = scrapy.Field(
+        input_processor = MapCompose(remove_tags, remove_meters),
+        output_processor = TakeFirst())
 
 
     # Maybe add a second itemloader and then add the response to the parse_item?

@@ -81,7 +81,7 @@ class RealEstateSpider(CrawlSpider):
         l.add_xpath('sq_meters', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[4]')
         l.add_xpath('contruction_year', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[5]')
         l.add_xpath('available_from', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[6]')
-        # Binary Data (Is present = true, is not present/no information = '')
+        # Binary Data (if present = true, is not present/no information = '')
         l.add_xpath('balcony', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Balcon")]')
         l.add_xpath('parking_ext', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Parking extérieur")]')
         l.add_xpath('parking_int', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Parking intérieur")]')
@@ -90,11 +90,13 @@ class RealEstateSpider(CrawlSpider):
         l.add_xpath('wash_m', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Lave-linge")]')
         l.add_xpath('dishwasher', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Lave-vaisselle")]')
         l.add_xpath('dryer', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Sèche-linge")]')
-        
-        
-        
-        
-        
+        # Critères Data
+        l.add_xpath('public_transp', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"Transports publics")]/div/div/following-sibling::div/p/span')
+        l.add_xpath('highway', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"Autoroute")]/div/div/following-sibling::div/p/span')
+        l.add_xpath('kindergarten', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"Jardin")]/div/div/following-sibling::div/p/span')
+        l.add_xpath('prim_school', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"École primaire")]/div/div/following-sibling::div/p/span')
+        l.add_xpath('secon_school', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"École secondaire")]/div/div/following-sibling::div/p/span')
+        l.add_xpath('closest_shop', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"Commerces")]/div/div/following-sibling::div/p/span')
         
 
         # XPATH for critères //div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Jardin")]
