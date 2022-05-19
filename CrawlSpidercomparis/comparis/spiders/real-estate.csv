@@ -105,3 +105,17 @@ address,available_from,contruction_year,floors,link,price,rooms,sq_meters,type
 8005 Zürich,nach Vereinbarung,2013,17. Stock,,2'590'000,3.5,120,Wohnung
 8005 Zürich,nach Vereinbarung,2004,nicht verfügbar,,1'840'000,2.5,84,Wohnung
 8005 Zürich,nach Vereinbarung,2005,4. Stock,,2'050'000,2.5,105,Loft
+address,available_from,contruction_year,floors,link,price,rooms,sq_meters,type
+,,,,,,,,
+8005 Zürich 8005 Zürich,nach Vereinbarung,2011,21. Stock,,auf Anfrage,11,603,Wohnung
+Turbinenstrasse 21 8005 Zürich,nach Vereinbarung,2015,1. Stock,,2'180'000,3.5,108,Wohnung
+8005 Zürich,nach Vereinbarung,2013,17. Stock,,2'590'000,3.5,120,Wohnung
+8005 Zürich,nach Vereinbarung,2004,nicht verfügbar,,1'840'000,2.5,84,Wohnung
+8005 Zürich,nach Vereinbarung,2005,4. Stock,,2'050'000,2.5,105,Loft
+address,available_from,contruction_year,floors,price,rooms,sq_meters,type
+,,,,,,,
+8005 Zürich 8005 Zürich,nach Vereinbarung,2011,21. Stock,auf Anfrage,11,603,Wohnung
+Turbinenstrasse 21 8005 Zürich,nach Vereinbarung,2015,1. Stock,2'180'000,3.5,108,Wohnung
+8005 Zürich,nach Vereinbarung,2013,17. Stock,2'590'000,3.5,120,Wohnung
+8005 Zürich,nach Vereinbarung,2004,nicht verfügbar,1'840'000,2.5,84,Wohnung
+8005 Zürich,nach Vereinbarung,2005,4. Stock,2'050'000,2.5,105,Loft

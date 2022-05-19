@@ -20,15 +20,17 @@ def remove_currency(value):
 def remove_sqm(value):
     return value.replace('m²','').strip()
 
+def remove_comma(value):
+    return value.replace(',','').strip()
+
 
 class PropertyItem(scrapy.Item):
     # define the fields for your item here like:
-    address = scrapy.Field(input_processor = MapCompose(remove_tags, remove_string), output_processor = TakeFirst())
-    price = scrapy.Field(input_processor = MapCompose(remove_tags, remove_currency, remove_string_currency), output_processor = TakeFirst())
-    type = scrapy.Field(input_processor = MapCompose(remove_tags), output_processor = TakeFirst())
-    rooms = scrapy.Field(input_processor = MapCompose(remove_tags), output_processor = TakeFirst())
-    floors = scrapy.Field(input_processor = MapCompose(remove_tags), output_processor = TakeFirst())
-    sq_meters = scrapy.Field(input_processor = MapCompose(remove_tags, remove_sqm), output_processor = TakeFirst())
-    contruction_year = scrapy.Field(input_processor = MapCompose(remove_tags), output_processor = TakeFirst())
-    available_from = scrapy.Field(input_processor = MapCompose(remove_tags), output_processor = TakeFirst())
-    link = scrapy.Field()
+    address = scrapy.Field(input_processor = MapCompose(remove_tags, remove_string, remove_comma), output_processor = TakeFirst())
+    price = scrapy.Field(input_processor = MapCompose(remove_tags, remove_currency, remove_string_currency, remove_comma), output_processor = TakeFirst())
+    type = scrapy.Field(input_processor = MapCompose(remove_tags, remove_comma), output_processor = TakeFirst())
+    rooms = scrapy.Field(input_processor = MapCompose(remove_tags, remove_comma), output_processor = TakeFirst())
+    floors = scrapy.Field(input_processor = MapCompose(remove_tags, remove_comma), output_processor = TakeFirst())
+    sq_meters = scrapy.Field(input_processor = MapCompose(remove_tags, remove_sqm, remove_comma), output_processor = TakeFirst())
+    contruction_year = scrapy.Field(input_processor = MapCompose(remove_tags, remove_comma), output_processor = TakeFirst())
+    available_from = scrapy.Field(input_processor = MapCompose(remove_tags, remove_comma), output_processor = TakeFirst())
