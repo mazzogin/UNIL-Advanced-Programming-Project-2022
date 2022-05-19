@@ -78,14 +78,39 @@ class PropertyItem(scrapy.Item):
     available_from = scrapy.Field(
         input_processor = MapCompose(remove_tags, remove_comma), 
         output_processor = TakeFirst())
+    
+    balcony =  scrapy.Field(
+        input_processor = MapCompose(remove_tags, parse_equipment),
+        output_processor = TakeFirst())
 
-    parking =  scrapy.Field(
+    parking_ext =  scrapy.Field(
+        input_processor = MapCompose(remove_tags, parse_equipment),
+        output_processor = TakeFirst())
+
+    parking_int =  scrapy.Field(
+        input_processor = MapCompose(remove_tags, parse_equipment),
+        output_processor = TakeFirst())
+
+    tv = scrapy.Field(
+        input_processor = MapCompose(remove_tags, parse_equipment),
+        output_processor = TakeFirst())
+
+    elevator  =  scrapy.Field(
         input_processor = MapCompose(remove_tags, parse_equipment),
         output_processor = TakeFirst())
     
-    balcon =  scrapy.Field(
+    wash_m  =  scrapy.Field(
         input_processor = MapCompose(remove_tags, parse_equipment),
         output_processor = TakeFirst())
+    
+    dishwasher  =  scrapy.Field(
+        input_processor = MapCompose(remove_tags, parse_equipment),
+        output_processor = TakeFirst())
+    
+    dryer  =  scrapy.Field(
+        input_processor = MapCompose(remove_tags, parse_equipment),
+        output_processor = TakeFirst())
+    
 
 
     # Maybe add a second itemloader and then add the response to the parse_item?

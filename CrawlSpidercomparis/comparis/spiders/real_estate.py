@@ -81,8 +81,21 @@ class RealEstateSpider(CrawlSpider):
         l.add_xpath('sq_meters', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[4]')
         l.add_xpath('contruction_year', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[5]')
         l.add_xpath('available_from', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[6]')
-        l.add_xpath('parking', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Parking")]')
-        l.add_xpath('balcon', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Balcon")]')
+        # Binary Data (Is present = true, is not present/no information = '')
+        l.add_xpath('balcony', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Balcon")]')
+        l.add_xpath('parking_ext', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Parking extérieur")]')
+        l.add_xpath('parking_int', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Parking intérieur")]')
+        l.add_xpath('tv', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"TV")]')
+        l.add_xpath('elevator', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Ascenseur")]')
+        l.add_xpath('wash_m', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Lave-linge")]')
+        l.add_xpath('dishwasher', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Lave-vaisselle")]')
+        l.add_xpath('dryer', '//div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Sèche-linge")]')
+        
+        
+        
+        
+        
+        
 
         # XPATH for critères //div[@class="css-16pvz65 ehesakb5"]/div[contains(.,"Jardin")]
         # "Equipements containts" XPATH //div[@class="css-k3nek6 ehesakb4"]/div[contains(.,"Ascenseur")]

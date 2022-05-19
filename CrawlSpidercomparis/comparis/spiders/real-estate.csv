@@ -215,3 +215,10 @@ Turbinenstrasse 21 8005 Zürich,À convenir,True,2015,1. étage,True,2'180'000,3
 8005 Zürich,À convenir,,2013,17. étage,True,2'590'000,3.5,120,Appartement
 8005 Zürich,À convenir,True,2004,Non disponible,True,1'840'000,2.5,84,Appartement
 8005 Zürich,À convenir,,2005,4. étage,True,2'050'000,2.5,105,Loft
+address,available_from,balcony,contruction_year,dishwasher,dryer,elevator,floors,parking_ext,parking_int,price,rooms,sq_meters,tv,type,wash_m
+,,,,,,,,,,,,,,,
+8005 Zürich 8005 Zürich,À convenir,,2011,,,True,21. étage,True,True,sur demande,11,603,,Appartement,
+Turbinenstrasse 21 8005 Zürich,À convenir,True,2015,,,True,1. étage,True,True,2'180'000,3.5,108,True,Appartement,
+8005 Zürich,À convenir,,2013,,,True,17. étage,True,,2'590'000,3.5,120,,Appartement,
+8005 Zürich,À convenir,True,2004,,,True,Non disponible,,True,1'840'000,2.5,84,True,Appartement,
+8005 Zürich,À convenir,,2005,,,True,4. étage,True,,2'050'000,2.5,105,,Loft,
