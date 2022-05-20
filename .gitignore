@@ -200,3 +200,4 @@ CrawlSpidercomparis/comparis/spiders/real-estate.csv
 CrawlSpidercomparis/comparis/spiders/response.html
 .gitignore
 response.html
+comparis_json.py
