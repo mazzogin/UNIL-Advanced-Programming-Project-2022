@@ -197,3 +197,6 @@ zoe-computer-sucks/comparis-data-sample.xlsx
 
 Basicspidercomparis
 CrawlSpidercomparis/comparis/spiders/real-estate.csv
+CrawlSpidercomparis/comparis/spiders/response.html
+.gitignore
+response.html
