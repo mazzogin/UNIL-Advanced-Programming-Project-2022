@@ -65,6 +65,11 @@ class PropertyItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, remove_currency, remove_string_currency, remove_comma), 
         output_processor = TakeFirst())
     
+    pricetwo = scrapy.Field(
+        input_processor = MapCompose(remove_tags), 
+        output_processor = TakeFirst())
+    
+
     type = scrapy.Field(
         input_processor = MapCompose(remove_tags, remove_comma), 
         output_processor = TakeFirst())
