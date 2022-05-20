@@ -148,11 +148,3 @@ class PropertyItem(scrapy.Item):
     closest_shop = scrapy.Field(
         input_processor = MapCompose(remove_tags, remove_meters),
         output_processor = TakeFirst())
-
-
-    # Maybe add a second itemloader and then add the response to the parse_item?
-    
-
-
-        # p class="css-cyiock ehesakb2
-        # //P[@class="css-cyiock ehesakb2"]
