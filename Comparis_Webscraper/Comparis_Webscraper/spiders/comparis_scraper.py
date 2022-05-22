@@ -2,8 +2,6 @@
 from numpy import append
 from pandas import read_csv
 import scrapy
-from scrapy.spiders import CrawlSpider, Rule
-from scrapy.linkextractors import LinkExtractor
 from scrapy.selector import Selector
 
 from webdriver_manager.chrome import ChromeDriverManager
@@ -22,16 +20,19 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
 # Other
-import csv
-
 import pandas as pd
 
 from scrapy.loader import ItemLoader
 from Comparis_Webscraper.items import ComparisWebscraperItem
-#from comparis.items import PropertyEquipment
 
 
 class Comparis_Spider(scrapy.Spider):
+    """
+    Spider based on scrapy.Spider class.
+    This spider loops through a list of predefined URL's in the "data" folder.
+
+
+    """
     name = 'real-estate'
     start_urls = ['https://httpbin.org/']
 
@@ -42,9 +43,9 @@ class Comparis_Spider(scrapy.Spider):
         
         for url in self.property_codes['url']:
             self.driver.get(url)
-            sleep(2)
+            sleep(0.8)
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            sleep(1.4)
+            sleep(1.5)
             
             scrapy_selector = Selector(text = self.driver.page_source)
 
