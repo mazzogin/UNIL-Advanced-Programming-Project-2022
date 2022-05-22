@@ -210,4 +210,6 @@ CrawlSpidercomparis/comparis/spiders/real-estate4_old.csv
 proxies.py
 real_estate_codes.py
 data/property_details2.csv
+data/Comparis_Start_URL.html
 data/property_codes2.csv
+
