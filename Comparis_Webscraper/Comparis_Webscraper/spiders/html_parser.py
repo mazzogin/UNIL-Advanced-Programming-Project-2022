@@ -12,5 +12,5 @@ class TestSpider(scrapy.Spider):
         for code in all_codes:
             yield {
                 'Property_Codes': code,
-                'url': f'https://en.comparis.ch/immobilien/marktplatz/details/show/{code}',
+                'url': f'https://fr.comparis.ch/immobilien/marktplatz/details/show/{code}',
             }

@@ -1,9 +1,5 @@
 from time import sleep
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import NoSuchElementException
 
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -16,6 +12,8 @@ url = 'https://fr.comparis.ch/immobilien/result/list?requestobject=%7B%22DealTyp
 
 # Open Browser
 driver.get(url)
+
+# Stay still for a moment to simulate human behaviour
 sleep(0.8)
 
 # Scroll to the end of the page
@@ -26,3 +24,5 @@ driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 # Save as HTML to extract the property codes
 with open('data/Comparis_Start_URL.html', 'w') as f:
     f.write(driver.page_source)
+
+driver.quit()
