@@ -26,13 +26,9 @@ import csv
 
 import pandas as pd
 
-
-# From our items.py file we import the item classes
-#from Comparis_Webscraper.items import ComparisWebscraperItem
+from scrapy.loader import ItemLoader
+from Comparis_Webscraper.items import ComparisWebscraperItem
 #from comparis.items import PropertyEquipment
-# from scrapy.loader import ItemLoader
-
-#driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))    
 
 
 class Comparis_Spider(scrapy.Spider):
@@ -45,18 +41,18 @@ class Comparis_Spider(scrapy.Spider):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         
         for url in self.property_codes['url']:
-            
             self.driver.get(url)
             sleep(2)
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             sleep(1.4)
             
             scrapy_selector = Selector(text = self.driver.page_source)
-            address = scrapy_selector.xpath('//h3[@class="css-yidf68 ehesakb2"]')
 
-        yield {
-                'address': address
-                }
+
+            l = ItemLoader(item = ComparisWebscraperItem(), selector = scrapy_selector)
+            l.add_xpath('rooms', '(//p[@class="css-1ush3w6 ehesakb2"]/span[last()])[2]')
+
+            yield l.load_item()
 
             
       #scrapy_selector = Selector(text = self.driver.page_source)
