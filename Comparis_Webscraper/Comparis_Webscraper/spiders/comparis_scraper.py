@@ -23,13 +23,14 @@ from selenium.webdriver.chrome.service import Service
 
 # Other
 import csv
+
 import pandas as pd
 
 
 # From our items.py file we import the item classes
-from Comparis_Webscraper.items import ComparisWebscraperItem
+#from Comparis_Webscraper.items import ComparisWebscraperItem
 #from comparis.items import PropertyEquipment
-from scrapy.loader import ItemLoader
+# from scrapy.loader import ItemLoader
 
 #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))    
 
@@ -38,27 +39,25 @@ class Comparis_Spider(scrapy.Spider):
     name = 'real-estate'
     start_urls = ['https://httpbin.org/']
 
-    def parse_pages(self, response):
-
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))    
-
-        property_codes = pd.read_csv(filepath_or_buffer='/Users/gino/University-and-Education/UNIL/Advanced-Programming/Comparis_Webscraper/Comparis_Webscraper/spiders/property_codes.csv')
-    
-        for url in property_codes['url']:
+    def parse(self, response):
+        self.property_codes = pd.read_csv(filepath_or_buffer='/Users/gino/University-and-Education/UNIL/Advanced-Programming/Comparis_Webscraper/Comparis_Webscraper/spiders/property_codes.csv')
+        #l = ItemLoader(item = ComparisWebscraperItem(), response = response)
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        
+        for url in self.property_codes['url']:
+            
             self.driver.get(url)
             sleep(2)
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            sleep(1)
-
+            sleep(1.4)
+            
             scrapy_selector = Selector(text = self.driver.page_source)
+            address = scrapy_selector.xpath('//h3[@class="css-yidf68 ehesakb2"]')
 
+        yield {
+                'address': address
+                }
 
-            yield {
-                'address': scrapy_selector.xpath('//h3[@class="css-yidf68 ehesakb2"]')
-                
-            }
-
-            sleep(1)
             
       #scrapy_selector = Selector(text = self.driver.page_source)
 
