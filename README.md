@@ -1,6 +1,21 @@
-TBD
+# Comparis Scraper
 
 
-1. Run file property_codes_downloader.py in directory Comparis_Webscraper
-2. In the terminal, cd Comparis_Webscraper/HTML_Parser/HTML_Parser/spiders
-3. Run command <scrapy crawl htmlparser -o ../../../data/property_codes.csv>
+## Running
+1. Install the required python dependencies
+   ```bash
+   make install_dep
+   ```
+2. Run the project
+   ```bash
+   make all
+   ```
+
+
+## Troubleshooting
+
+- Clean the working directory
+  ```bash
+  make clean
+  ```
+  Relaunch the programm

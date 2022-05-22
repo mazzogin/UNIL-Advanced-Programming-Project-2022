@@ -36,7 +36,7 @@ class Comparis_Spider(scrapy.Spider):
     start_urls = ['https://httpbin.org/']
 
     def parse(self, response):
-        self.property_codes = pd.read_csv(filepath_or_buffer='/Users/gino/University-and-Education/UNIL/Advanced-Programming/Comparis_Webscraper/Comparis_Webscraper/spiders/property_codes.csv')
+        self.property_codes = pd.read_csv(filepath_or_buffer='property_codes.csv')
         #l = ItemLoader(item = ComparisWebscraperItem(), response = response)
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         

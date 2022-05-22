@@ -205,3 +205,5 @@ CrawlSpidercomparis/comparis/spiders/realestate.csv
 CrawlSpidercomparis/comparis/spiders/real-estate5.csv
 CrawlSpidercomparis/comparis/spiders/real-estate4.csv
 CrawlSpidercomparis/comparis/spiders/real-estate4_old.csv
+
+data/Comparis_Start_URL.html

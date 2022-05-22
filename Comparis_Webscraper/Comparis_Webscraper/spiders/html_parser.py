@@ -4,7 +4,7 @@ from scrapy.loader import ItemLoader
 
 class TestSpider(scrapy.Spider):
     name = 'htmlparser'
-    start_urls = ['file:///Users/gino/University-and-Education/UNIL/Advanced-Programming/data/Comparis_Start_URL.html']
+    start_urls = ['../../../data/Comparis_Start_URL.html']
     
     def parse(self, response):
         codes = response.css('script').re_first('{\"adIds\":\[(.+?)]')
