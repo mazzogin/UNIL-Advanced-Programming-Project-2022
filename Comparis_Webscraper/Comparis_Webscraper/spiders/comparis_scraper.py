@@ -77,3 +77,5 @@ class Comparis_Spider(scrapy.Spider):
             l.add_xpath('closest_shop', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"Commerces")]/div/div/following-sibling::div/p/span')
 
             yield l.load_item()
+
+        self.driver.quit()
