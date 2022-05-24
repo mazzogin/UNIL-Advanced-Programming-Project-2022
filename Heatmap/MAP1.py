@@ -51,8 +51,6 @@ gdf_laus['y'] = gdf_laus['geometry'].centroid.y
 json_laus = json.loads(gdf_laus.to_json())
 alt_laus = alt.Data(values = json_laus['features'])
 
-
-
 #Make map with altair
 alt_pricebyzip = alt.Chart(alt_laus).mark_geoshape(
     stroke = 'blue'
