@@ -1,29 +1,25 @@
 # Scrapy
-from numpy import append
-from pandas import read_csv
 import scrapy
 from scrapy.selector import Selector
 
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-
-# Selenium
+# Selenium / Selenium related
 import selenium
-from time import sleep
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-
-from selenium.common.exceptions import NoSuchElementException
-
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from time import sleep
 
 # Other
-import pandas as pd
-
+from numpy import append
+from pandas import read_csv
 from scrapy.loader import ItemLoader
 from Comparis_Webscraper.items import ComparisWebscraperItem
+from datetime import date
+import pandas as pd
 
 
 class Comparis_Spider(scrapy.Spider):
@@ -34,10 +30,15 @@ class Comparis_Spider(scrapy.Spider):
 
     """
     name = 'real-estate'
+
+    # Just provide a random website where we can connect for sure
     start_urls = ['https://httpbin.org/']
 
+    # Defining the output name and format of the final data
+    custom_settings = {'FEEDS': {f'../../../data/property_details_{date.today()}.csv':{'format':'csv'}}}
+
     def parse(self, response):
-        self.property_codes = pd.read_csv(filepath_or_buffer='property_codes.csv')
+        self.property_codes = pd.read_csv(filepath_or_buffer='../../../data/property_codes2.csv')
         #l = ItemLoader(item = ComparisWebscraperItem(), response = response)
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         
