@@ -33,6 +33,31 @@
 
 \graphicspath{{img/}}
 
+\newcommand{\scriptO}{\mathcal{O}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\range}{\mathcal{R}}
+\newcommand{\nul}{\mathcal{N}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\sigmasqrd}{\sigma^{2}}
+\newcommand{\ProbP}{\mathds{P}}
+\newcommand{\chisqrd}{\upchi^{2}}
+\newcommand{\ExpV}{\mathds{E}}
+\newcommand{\epsiloni}{\epsilon_i}
+\newcommand{\varsign}{\mathds{V}}
+\newcommand{\normN}{\mathcal{N}}
+\newcommand{\Rsqrd}{R^{2}}
+\newcommand{\AdjRsqrd}{\Bar{R}^{2}}
+\newcommand{\NormDist}{\mathcal{N}(0,1)}
+\newcommand{\varsignAR}{\mathds{V}ar}
+\newcommand{\Cov}{\mathds{C}ov}
+\newcommand{\el}{\mathcal{\ell}}
+\newcommand{\Var}{\mathrm{Var}}
+
 %---------------------------------------------%
 %               Main Document                 %
 %---------------------------------------------%
@@ -42,9 +67,8 @@
 \begin{document}
 
 \title{Paper Title*\\
-{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
-should not be used}
-\thanks{Identify applicable funding agency here. If none, delete this.}
+{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and should not be used}
+% \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
@@ -64,31 +88,17 @@ email address}
 \textit{name of organization (of Aff.)}\\
 City, Country \\
 email address}
-\and
-\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-\and
-\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-\and
-\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
 }
 
 \maketitle
 
+% Abstract, Keywords, Intro
 \subfile{00.tex}
+% Section 1
 \subfile{01.tex}
+% Section 2
 \subfile{02.tex}
+% Section 3 + Conclusion
 \subfile{03.tex}
 
 
