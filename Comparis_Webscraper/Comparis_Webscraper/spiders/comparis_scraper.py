@@ -46,7 +46,7 @@ class Comparis_Spider(scrapy.Spider):
     def parse(self, response):
 
         # Get list of url's
-        self.property_codes = pd.read_csv(filepath_or_buffer='../../../data/property_codes2.csv')
+        self.property_codes = pd.read_csv(filepath_or_buffer='../../../data/property_codes.csv')
 
         # Define Chrome as browser
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
