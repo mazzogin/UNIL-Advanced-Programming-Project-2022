@@ -14,7 +14,7 @@ def search_info1(price1,price2):
     new_list2 = []
     numbers = []
     for i in range(0,len(xl_file)):
-        a = int(xl_file["Price"].loc[[i]])
+        a = int(xl_file["price"].loc[[i]])
         if a > price1 and a < price2:
             numbers.append(i)
     
@@ -36,7 +36,7 @@ def search_info2(rooms1,rooms2):
     new_list2 = []
     numbers = []
     for i in range(0,len(xl_file)):
-        a = float(xl_file["Rooms"].loc[[i]])
+        a = float(xl_file["rooms"].loc[[i]])
         if a > rooms1 and a < rooms2:
             numbers.append(i)
     
@@ -58,7 +58,7 @@ def search_info3(zipcode):
     new_list2 = []
     numbers = []
     for i in range(0,len(xl_file)):
-        a = int(xl_file["Zip_Code"].loc[[i]])
+        a = int(xl_file["zip_code"].loc[[i]])
         if a == zipcode:
             numbers.append(i)
     
@@ -103,7 +103,7 @@ tab_control.add(frame3, text='Zip Code')
    
     
 #open xlm
-xl_file = pd.read_excel("data.xlsx",index_col=None,engine="openpyxl",dtype="string")
+xl_file = pd.read_excel("database.xlsx",index_col=None,engine="openpyxl",dtype="string")
 new = list(xl_file)
 
 
