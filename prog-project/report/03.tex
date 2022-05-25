@@ -13,8 +13,30 @@
     \item Pandas  - version 1.4.2
     \item Time
     \item Datetime
+    \item Openpyxl - version 3.0.9
+    \item Tk (tkinter) - version 0.1.0
+    \item Pillow - version 9.1.1
 \end{itemize}
 
-\subsection{Subsection}
+\subsection{Structure of the project}
+
+\subsection{Implementation of the webscrapping}
+
+\subsection{Implementation of the GUI}
+
+\subsubsection{Organizing the scrapped data}
+The first step to building the GUI is organizing the data with which we will be working.
+We first analyse the dataset and then clean it for the GUI to function correctly.
+This is done at the beginning of the program main.py. \par
+In this program, we first load the dataset. 
+Then we print the headings and the description to check the data and the types.
+We proceed to split the address from the zipcode, to get the zip code in a separate column. 
+We do this as we want to be able to search properties within a certain zipcode. 
+We then remove variables that are mispelled or uncorrect. 
+Finally we save the database. This database is the one that the GUI will use to return information to the user.
+
+\subsubsection{Building the GUI}
+
+\subsection{Maps?}
 
 \end{document}
