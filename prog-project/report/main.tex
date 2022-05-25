@@ -25,6 +25,8 @@
 \usepackage{acro}               % Lets you define acronmys and subsequently print them
 \usepackage{tikz}               % Necessary to create graphic elements like flowcharts/payoff diagrams etc.
 \usepackage{pgfplots}           % For plotting inside of latex
+\usepackage{zref-xr}            % Cross-referencing across different subfiles should be possible with this package
+\usepackage{xr}                 % Referencing across subfiles
 
 %---------------------------------------------%
 %                Environments                 %
@@ -60,7 +62,41 @@
 \newcommand{\Var}{\mathrm{Var}}
 
 \NewDocumentCommand{\hly}{ O{}}{\colorbox{yellow}{#1}}
+% Inserts graphic with the exact command the template used
+\NewDocumentCommand{\img}{O{}O{}O{}}{
+    \begin{figure}[htbp]
+        \centerline{
+            \includegraphics{prog_#1.png}}
+        \caption{#2}
+        \label{fig:#3}
+    \end{figure}}
 
+%---------------------------------------------%
+%        Settings Related to Packages         %
+%---------------------------------------------%
+
+% Referencing across subfiles
+\zxrsetup{
+    tozreflabel=true,
+    toltxlabel=true,  
+    }
+
+% Setting up hyperlinks
+\hypersetup{
+    bookmarks=true,
+    unicode=false,
+    pdftoolbar=true,
+    pdfmenubar=true,
+    pdffitwindow=false,
+    pdfstartview={FitH},
+    pdfborder = {0 0 0},
+    pdfnewwindow=true,
+    colorlinks=false,
+    linkcolor=black,
+    citecolor=green,
+    filecolor=magenta,
+    urlcolor=blue
+    }
 %---------------------------------------------%
 %               Main Document                 %
 %---------------------------------------------%
