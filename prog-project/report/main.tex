@@ -27,6 +27,8 @@
 \usepackage{pgfplots}           % For plotting inside of latex
 \usepackage{zref-xr}            % Cross-referencing across different subfiles should be possible with this package
 \usepackage{xr}                 % Referencing across subfiles
+\usepackage{courier}            % Adds the courier font to display coding sections/packages
+\usepackage{xspace}             % Inserts a space after when using a \newcommand
 
 %---------------------------------------------%
 %                Environments                 %
@@ -60,6 +62,12 @@
 \newcommand{\Cov}{\mathds{C}ov}
 \newcommand{\el}{\mathcal{\ell}}
 \newcommand{\Var}{\mathrm{Var}}
+\newcommand{\js}{JavaScript\xspace}
+\newcommand{\request}{\pkg[requests]\xspace}
+\newcommand{\beautifulsoup}{\pkg[BeautifulSoup]\xspace}
+\newcommand{\scrapy}{\pkg[Scrapy]\xspace}
+\newcommand{\selenium}{\pkg[Selenium]\xspace}
+
 
 \NewDocumentCommand{\hly}{ O{}}{\colorbox{yellow}{#1}}
 % Inserts graphic with the exact command the template used
@@ -70,6 +78,9 @@
         \caption{#2}
         \label{fig:#3}
     \end{figure}}
+
+\NewDocumentCommand{\pkg}{O{}}{
+        {\fontsize{9}{9}\selectfont{\texttt{#1}}}}
 
 %---------------------------------------------%
 %        Settings Related to Packages         %
@@ -102,6 +113,31 @@
 \DeclareAcronym{api}{
     short=API,
     long= Application Programming Interface,
+    short-plural = s ,
+    long-plural = s ,
+    }
+
+\DeclareAcronym{url}{
+    short=URL,
+    long= Uniform Resource Locator,
+    short-plural = s ,
+    long-plural = s ,
+    }
+
+\DeclareAcronym{html}{
+    short=HTML,
+    long= Hypertext Markup Language,
+    }
+
+\DeclareAcronym{xpath}{
+    short=XPath,
+    long= XML Path Language,
+    short-plural = s ,
+    }
+    
+\DeclareAcronym{ip}{
+    short=IP,
+    long= Internet Protocol,
     short-plural = s ,
     long-plural = s ,
     }
