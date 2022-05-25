@@ -6,17 +6,32 @@
 
 \section{Methodology}
 A big difference between real estate and other publicly traded assets is that there is no centralized platform where offers can be tracked. 
-In the case of asset classes such as bonds and equity this service is provided by multiple sources
-such as Bloomberg, Refinitiv and Morningstar, even though the assets themselves are sometimes traded in various markets.
+In the case of asset classes such as bonds and equity this service is provided by multiple sources such as Bloomberg, Refinitiv and Morningstar.
 
-Something similar is missing in the Swiss real estate market. 
-Whilst there exist websites such as \verb|comparis.ch| where listings from different are pooled, there is hardly a way to analyze this data.
-Furthermore, as mentioned earlier, it is rare to obtain historical data on the property.
+Something similar is missing for the Swiss real estate market. 
+Usually real estate on the various websites is presented as a list of single "tiles", 
+along with a brief overview of the key data of the corresponding property (for reference see figure \ref{fig:listing}).
+Normally there is no possibility to see the average cost per square meter in the ZIP code 
+and no real way to compare similar estates.
 
-These circumstances led to the decision that the data will be obtained via an algorithm that scrapes the required data
-from Comparis. 
+Given that the data is neither available via an \acs*{api} nor through an already established database,
+the decision was made to write an algorithm that scrapes the required data from a website.
 
-Comparis was selected as platform since it, as previously mentioned, pools listings from several other websites.
+
+\subsection{Choice of Website}
+
+Whilst there exist numerous websites that act as middlemen between buyer and seller such as \verb|www.immoscout24.ch| and \verb|www.homegate.ch|,
+all of them suffer from the same underlying problem mentioned in the introduction. 
+Selecting and pricing real estate by clicking through listing after listing is cumbersome and inefficient.
+Furthermore, with the data being split up over many websites, a buyer might not find his ideal new property, simply by looking on the wrong platform.
+
+An attempt at creating a more transparent and efficient real estate market was made by Comparis. 
+On their website, listings from many sources are aggregated and displayed according to their key characteristics.
+However, also \verb|www.comparis.ch| does not offer tools for further analysis and does not readily display historical data,
+except for increases or decreases in the price in percentage.
+
+For the purpose of creating a database which provides a user with information on as many properties in a given area as possible, 
+\verb|www.comparis.ch| is the ideal target for scraping data.
 
 
 \subsection{Web Scraper}
