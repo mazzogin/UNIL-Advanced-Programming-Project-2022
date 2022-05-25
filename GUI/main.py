@@ -45,7 +45,6 @@ def search_info(price1,price2, room1,room2):
     tree.delete(*tree.get_children())
     new_list = []
     new_list2 = []
-    new_list3 = []
     numbers = []
     for i in range(0,len(xl_file)):
         a = int(xl_file["Price"].loc[[i]])
