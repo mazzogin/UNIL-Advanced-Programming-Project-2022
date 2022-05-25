@@ -55,7 +55,11 @@ def remove_meters(value):
 
 
 class ComparisWebscraperItem(scrapy.Item):
-   # Primary Information Fields
+    """
+    Defines how the input from the scraped fields is processed.
+
+    Also defines how the output is processed.
+    """
     address = scrapy.Field(
         input_processor = MapCompose(remove_tags, remove_string, remove_comma), 
         output_processor = Join())
