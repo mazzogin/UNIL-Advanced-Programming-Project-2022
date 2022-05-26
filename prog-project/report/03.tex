@@ -57,7 +57,12 @@ Finally we save the dataset. This dataset is the one that the GUI will use to re
         \node[process, left=of dec1] (pro1) {Clean and Organize data};
         \node[process, left=of dec2] (pro6) {Find bug};
         \node[process, left=of dec4] (pro7) {Re-run the program};
-        \draw [->] (dec1) |- (pro1);
+        \draw [->] (dec1) |- (pro1); %{No} missing
+        \draw [->] (dec2) |-  (pro6); %{No} missing
+        \draw [->] (dec4) |-   (pro7); %{No} missing
+        \draw [->] (pro1) |- (pro2);
+        \draw [->] (pro6) |-  (in2);
+        \draw [->] (pro7) |-  (in3);
     \end{scope}
     % \draw [arrow] (dec1) |- node[anchor=west] {No} (pro1);
     % \draw (dec1) -- {No} (pro1);
