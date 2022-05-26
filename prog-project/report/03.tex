@@ -36,7 +36,46 @@ We do this as we want to be able to search properties within a certain zipcode.
 Finally we save the dataset. This dataset is the one that the GUI will use to return information to the user.
 
 \subsubsection{Building the GUI}
-
+\usetikzlibrary{arrows.meta, 
+                chains,
+                positioning,
+                shapes}
+\tikzset{
+    base/.style = {draw, text width=1cm, align=center, minimum height=1cm},
+   startstop/.style = {base, rounded corners}, 
+     process/.style = {base}, 
+    decision/.style = {diamond, aspect=1.3, base, inner xsep=0pt, align=flush center}, 
+   connector/.style = {shape=signal,signal to=south, base, text width=1cm}, 
+        line/.style = {draw, -Latex}, 
+       input/.style = {trapezium, trapezium stretches body,
+                       trapezium left angle=70, trapezium right angle=110,
+                       base}
+}
+\newcommand{\yes}{edge node [above] {yes}}
+\newcommand{\no}{edge  node [left]  {no}}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
+    \begin{scope}[nodes={on chain, join=by line}]
+\node[startstop] (start) {Start};
+\node[input] (in1) {Load Scraped data};
+\node[decision] (dec1) {Is Data Cleaned?}
+\node[input] (in2) {Start GUI by importing tkinter}
+\node[process] (pro2a) {link to cleaned dataset};
+\node[process] (pro2) {Format main window};
+\node[process] (pro3) {Format frames as tabs};
+\node[process] (pro4b) {Create functions for each tab};
+\node[process] (pro5) {Define main loop};
+\node[decision] (dec2) {Check GUI is working};
+\node[input] (in3) {User can serch properties};
+\node[decision] (dec4) {End the program};
+\node[startstop] (start1) {End};
+    \end{scope}
+\node[process, left=of dec1] (pro1) {Clean and Organize data};
+\node[process, left=of dec2] (pro7a) {Find bug};
+\node[process, left=of dec4] (pro7a) {Re-run the program};
+\end{tikzpicture}
+    \end{figure}
 \subsection{Maps?}
 
 \end{document}
