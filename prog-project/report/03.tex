@@ -25,16 +25,15 @@
 \subsection{Implementation of the \ac{gui}}
 
 \subsubsection{Organizing the scrapped data}
-The first step to building the \ac{gui} is organizing the data with which we will be working.
-We first analyze the dataset and then clean it for the \ac{gui} to function correctly.
-This is done at the beginning of the program main.py.
-
-In this program, we first load the dataset. 
+The first step to building the \ac{gui} is organizing the data that we obtain from the web scraping.
+We first analyze the dataset and then clean it for the GUI to function correctly.
+This is done in the program cleaning\_database.py which we also use to do the data analysis in our parallel project. \par
+In this cleaning program, we first load the dataset. 
 Then we print the headings and the description to check the data and the types.
-We proceed to split the address from the zip code, to get the zip code in a separate column. 
+We remove variables that are misspelled, incorrect or missing. 
+We then proceed to split the address from the zip code, to get the zip code in a separate column. 
 We do this as we want to be able to search properties within a certain zip code. 
-We then remove variables that are misspelled or incorrect. 
-Finally, we save the database. This database is the one that the \ac{gui} will use to return information to the user.
+Finally we save the dataset. This dataset is the one that the GUI will use to return information to the user.
 
 \subsubsection{Building the \ac{gui}}
 
