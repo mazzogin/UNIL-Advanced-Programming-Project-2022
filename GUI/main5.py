@@ -97,7 +97,7 @@ def graph_it1():
     plt.xticks(rotation = 90);
     plt.title("Average price by zip code")
     plt.show()   
-    plt.savefig('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/PricebyZip.png')
+    plt.savefig('GUI/PricebyZip.png')
 
 def graph_it2():
     #Style and look of my plot
@@ -110,7 +110,7 @@ def graph_it2():
     plt.xticks(rotation = 90);
     plt.title("Average price by number of rooms")
     plt.show()   
-    plt.savefig('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/PricebyRooms.png')   
+    plt.savefig('GUI/PricebyRooms.png')   
      
 #config
 width = 1100
@@ -143,16 +143,16 @@ tab_control.add(frame3, text='Zip Code')
 tab_control.add(frame4, text='Graphs') 
     
 #open xlm
-xl_file = pd.read_excel("data.xlsx",index_col=None,engine="openpyxl",dtype="string")
+xl_file = pd.read_excel("GUI/data.xlsx",index_col=None,engine="openpyxl",dtype="string")
 new = list(xl_file)
 
 #graph file
-data = df = pd.read_excel('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/MeanPriceZIP.xlsx',
+data = df = pd.read_excel('GUI/MeanPriceZIP.xlsx',
                    sheet_name='Sheet1', engine="openpyxl",index_col=0)
 data['price'] = data['price'].astype(float)
 data['zip_code'] = data['zip_code'].astype(int)
 
-dataR = df = pd.read_excel('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/MeanPriceRooms.xlsx',
+dataR = df = pd.read_excel('GUI/MeanPriceRooms.xlsx',
                    sheet_name='Sheet1', engine="openpyxl",index_col=0)
 dataR['price'] = dataR['price'].astype(float)
 dataR['rooms'] = dataR['rooms'].astype(float)
