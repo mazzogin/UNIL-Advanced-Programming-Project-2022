@@ -2,9 +2,12 @@ from tkinter import *
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import messagebox
-import tkinter
 import pandas as pd
 import openpyxl
+from PIL import ImageTk, Image
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 #functions
 def search_info1(price1,price2):
@@ -73,10 +76,45 @@ def search_info3(zipcode):
         for k in new_list2:
             tree1.insert("",END,values=k)
             
+#define clear box
+def clear_fields():
+        entry1.delete(0, END)
+        entry2.delete(0, END)
+        entry3.delete(0, END)
+        entry4.delete(0, END)
+        entry5.delete(0, END)
+        tree1.delete(*tree1.get_children())
+        
+#define graph
+def graph_it1():
+    #Style and look of my plot
+    sns.set(style="whitegrid")
+    f, ax = plt.subplots(figsize=(18, 6),)
+    sns.set_color_codes("pastel")
+    #generate the bar plot
+    sns.barplot(x='zip_code', y='price', ci = False, data=data, palette="Blues_d");
+    #rotate the x-labels so the zipcodes are easier to read
+    plt.xticks(rotation = 90);
+    plt.title("Average price by zip code")
+    plt.show()   
+    plt.savefig('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/PricebyZip.png')
 
+def graph_it2():
+    #Style and look of my plot
+    sns.set(style="whitegrid")
+    f, ax = plt.subplots(figsize=(18, 6),)
+    sns.set_color_codes("pastel")
+    #generate the bar plot
+    sns.barplot(x='rooms', y='price', ci = False, data=dataR, palette="Blues_d");
+    #rotate the x-labels so the zipcodes are easier to read
+    plt.xticks(rotation = 90);
+    plt.title("Average price by number of rooms")
+    plt.show()   
+    plt.savefig('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/PricebyRooms.png')   
+     
 #config
-width = 700
-height = 500
+width = 1100
+height = 700
 title = "Search properties"
 f1 = ("Arial",14)
 #tkinter
@@ -88,24 +126,36 @@ root.title(title)
 tab_control = ttk.Notebook(root)
 tab_control.pack()
 #Create Frames
-frame1 = ttk.Frame(tab_control, width=700, height=500)
-frame2 = ttk.Frame(tab_control, width=700, height=500)
-frame3 = ttk.Frame(tab_control, width=700, height=500)
+frame1 = ttk.Frame(tab_control, width=1100, height=700)
+frame2 = ttk.Frame(tab_control, width=1100, height=700)
+frame3 = ttk.Frame(tab_control, width=1100, height=700)
+frame4 = ttk.Frame(tab_control, width=1100, height=700)
 
 frame1.pack(expand=TRUE, fill='both')
 frame2.pack(expand=TRUE, fill='both')
 frame3.pack(expand=TRUE, fill='both')
+frame4.pack(expand=TRUE, fill='both')
 
 #Define tabs
 tab_control.add(frame1, text='Price Range')
 tab_control.add(frame2, text='Number of Rooms')
 tab_control.add(frame3, text='Zip Code')
-   
+tab_control.add(frame4, text='Graphs') 
     
 #open xlm
-xl_file = pd.read_excel("dataset.xlsx",index_col=None,engine="openpyxl",dtype="string")
+xl_file = pd.read_excel("data.xlsx",index_col=None,engine="openpyxl",dtype="string")
 new = list(xl_file)
 
+#graph file
+data = df = pd.read_excel('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/MeanPriceZIP.xlsx',
+                   sheet_name='Sheet1', engine="openpyxl",index_col=0)
+data['price'] = data['price'].astype(float)
+data['zip_code'] = data['zip_code'].astype(int)
+
+dataR = df = pd.read_excel('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/MeanPriceRooms.xlsx',
+                   sheet_name='Sheet1', engine="openpyxl",index_col=0)
+dataR['price'] = dataR['price'].astype(float)
+dataR['rooms'] = dataR['rooms'].astype(float)
 
 ### format tab1
 Label1 = Label(frame1,text="Enter your price range:").grid(row=1, column=0, sticky=W, padx=10)
@@ -116,11 +166,15 @@ Label2 = Label(frame1,text="to").grid(row=1, column=2)
 entry2 = Entry(frame1)
 entry2.grid(row=1, column=3)
 
-B1= Button(frame1, text="Search",command=lambda:search_info1(int(entry1.get()),int(entry2.get()))).place(relx=0.9,rely=0,anchor="nw")
+B1= Button(frame1, text="Search",command=lambda:search_info1(int(entry1.get()),int(entry2.get()))).grid(row=1, column=5, padx=5)
+B2 = Button(frame1, text="Clear", command=clear_fields)
+B2.grid(row=4, column=4)
 
+#Scrollbar format
 scrollbar1 = Scrollbar(root)
 scrollbar1.place(relx=0.975,rely=0.6,anchor="center",relheight=0.9)
-scrollbar1.bind("<B1>", search_info1)
+
+#treeview format
 tree1 = ttk.Treeview(root, show='headings',yscrollcommand=scrollbar1.set)
 tree1['columns']=new
 tree1.column("#0",anchor="center",width=0)
@@ -130,7 +184,7 @@ for i in new:
     tree1.heading(i,text=i)
 tree1.place(relx=0.48,rely=0.6,anchor="center",relheight=0.9,relwidth=0.95)
 scrollbar1.config(command=tree1.yview)
-tree1.bind("<B1>", search_info1)
+
 
 ### format tab2
 Label2 = Label(frame2,text="Number Of Rooms").grid(row=1, column=0, sticky=W, padx=10)
@@ -141,42 +195,24 @@ Label2 = Label(frame2,text="to").grid(row=1, column=2)
 entry4 = Entry(frame2)
 entry4.grid(row=1, column=3)
 
-B2= Button(frame2, text="Search",command=lambda:search_info2(float(entry3.get()),int(entry4.get()))).place(relx=0.9,rely=0,anchor="nw")
-
-'''scrollbar2 = Scrollbar(frame2)
-scrollbar2.place(relx=0.975,rely=1.2,anchor="center",relheight=0.9)
-tree2 = ttk.Treeview(frame1, show='headings',yscrollcommand=scrollbar2.set)
-tree2['columns']=new
-tree2.column("#0",anchor="center",width=0)
-for i in new:
-    tree2.column(i,anchor="center",width=20)
-for i in new:
-    tree2.heading(i,text=i)
-tree2.place(relx=0.48,rely=1.2,anchor="center",relheight=0.9,relwidth=0.95)
-scrollbar2.config(command=tree2.yview)'''
-
-            
+B3= Button(frame2, text="Search",command=lambda:search_info2(float(entry3.get()),int(entry4.get()))).grid(row=1, column=5, padx=5)
+B4 = Button(frame2, text="Clear", command=clear_fields)
+B4.grid(row=4, column=5)            
 ### Format tab 3
 Label3 = Label(frame3,text="ZIP CODE").grid(row=1, column=0, sticky=W, padx=10)
 entry5 = Entry(frame3)
 entry5.grid(row=1, column=1)
- 
 
-B2= Button(frame3, text="Search",command=lambda:search_info3(int(entry5.get()))).place(relx=0.9,rely=0,anchor="nw")
+B5= Button(frame3, text="Search",command=lambda:search_info3(int(entry5.get()))).grid(row=1, column=5, padx=5)
+B6 = Button(frame3, text="Clear", command=clear_fields)
+B6.grid(row=4, column=5)            
 
-'''scrollbar3 = Scrollbar(frame3)
-scrollbar3.place(relx=0.975,rely=1.2,anchor="center",relheight=0.9)
-tree3 = ttk.Treeview(frame1, show='headings',yscrollcommand=scrollbar3.set)
-tree3['columns']=new
-tree3.column("#0",anchor="center",width=0)
-for i in new:
-    tree3.column(i,anchor="center",width=20)
-for i in new:
-    tree3.heading(i,text=i)
-tree3.place(relx=0.48,rely=1.2,anchor="center",relheight=0.9,relwidth=0.95)
-scrollbar3.config(command=tree3.yview)'''
+### Format tab 4
+Label4 = Label(frame4,text="Average price by Zip Code").grid(row=1, column=0, sticky=W, padx=10)
+B5= Button(frame4, text="See graph",command=lambda:graph_it1()).grid(row=1, column=3, padx=5)
 
+Label5 = Label(frame4,text="Average price by number of rooms").grid(row=2, column=0, sticky=W, padx=10)
+B6= Button(frame4, text="See graph",command=lambda:graph_it2()).grid(row=2, column=3, padx=5)
 
 #functions
 root.mainloop()
-
