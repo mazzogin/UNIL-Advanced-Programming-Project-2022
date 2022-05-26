@@ -83,9 +83,8 @@ Below a list of all the packages plus their respective versions that were used c
 
 \subsection{Implementation of the Web Scraper}
 As mentioned previously, the web scraping was done by utilizing two different tools, \pkg[Scrapy] and \pkg[Selenium].
-When programming the spider, the main challenge was to implement the vision of what it should do.
-
-When called, the spider should do the following:
+When programming the spider, the main challenge was to implement the vision of what it should do. 
+When called, the spider should be able to do the following:
 \begin{enumerate}
     \item Activate the browser via \hspace*{-6pt} \pkg[Selenium]
     \item Access a list of predefined \acsp*{url}
@@ -99,6 +98,9 @@ When called, the spider should do the following:
     \item Output (yield) the data from the \hspace*{-5pt} \pkg[ItemLoader] into the "data" directory as \hspace*{-5pt}
     \pkg[.csv] file with the download date in the name
 \end{enumerate}
+
+Before explaining how the main spider was built,
+a brief explanation of how the \acs*{url} of every single property was obtained without getting \acs*{ip}-blocked.
 
 \subsubsection{Obtaining the List of \acsp*{url}}
 Web scraping turned out to be a mix of close investigation of \acs*{html} source codes, 
@@ -130,13 +132,20 @@ The spider then yields the ID's and creates \acsp*{url} by adding them to the en
 \begin{figure}[htbp]
     \centerline{
         \includegraphics[width = 80mm]{prog_4.png}}
-    \caption{Structure of a \acs*{url}}
+    \caption{Structure of a \acs*{url} \cite{IBMDocumentation2021}}
     \label{fig:listing}
 \end{figure}
 
 \subsubsection{Creating the "property-scraper" Spider}
+Whilst the idea of combining two different web scraping services into one project came up early on,
+a first instance of a working example was presented in an article on towardsdatascience.com\cite{reusovaWebScrapingLess2019}
+However, the given example had to be heavily adapted, especially since in this project, 
+using the \pkg[ItemLoader] was of high importance.
+As aforementioned, the \pkg[ItemLoader] allows for efficient input- and output processing of data obtained from scraping \acs*{html}. 
+The goal was that the data required a minimum of cleaning (i.e. no extraction of text, no deletion of \acs*{html} tags outside of the spider).
+The following lines will explain how this goal was reached.
 
-
+One of the most important
 
 
 
