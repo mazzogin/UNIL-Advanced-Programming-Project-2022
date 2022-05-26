@@ -63,10 +63,11 @@
 \newcommand{\el}{\mathcal{\ell}}
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\js}{JavaScript\xspace}
-\newcommand{\request}{\pkg[requests]\xspace}
-\newcommand{\beautifulsoup}{\pkg[BeautifulSoup]\xspace}
-\newcommand{\scrapy}{\pkg[Scrapy]\xspace}
-\newcommand{\selenium}{\pkg[Selenium]\xspace}
+\newcommand{\request}{\hspace{-8pt} \pkg[requests]\xspace \hspace{-8pt} }
+\newcommand{\beautifulsoup}{\hspace{-8pt} \pkg[BeautifulSoup]\xspace \hspace{-8pt}}
+\newcommand{\scrapy}{\hspace{-8pt} \pkg[Scrapy]\xspace \hspace{-8pt} }
+\newcommand{\selenium}{\hspace{-8pt} \pkg[Selenium]\xspace \hspace{-8pt} }
+\newcommand{\tkinter}{\hspace{-8pt} \pkg[tkinter] \xspace \hspace{-8pt}}
 
 
 \NewDocumentCommand{\hly}{ O{}}{\colorbox{yellow}{#1}}
@@ -80,7 +81,7 @@
     \end{figure}}
 
 \NewDocumentCommand{\pkg}{O{}}{
-        {\fontsize{9}{9}\selectfont{\texttt{#1}}}}
+        {\fontsize{9}{2}\selectfont{\texttt{#1}} \xspace}}
 
 %---------------------------------------------%
 %        Settings Related to Packages         %
@@ -141,6 +142,19 @@
     short-plural = s ,
     long-plural = s ,
     }
+
+\DeclareAcronym{gui}{
+    short = GUI,
+    long = Graphical User Interface,
+    short-plural = s ,
+    long-plural = s ,
+}    
+
+\DeclareAcronym{json}{
+    short = JSON,
+    long = JavaScript Object Notation,
+}
+
 %---------------------------------------------%
 %               Main Document                 %
 %---------------------------------------------%

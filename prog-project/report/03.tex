@@ -6,36 +6,37 @@
 
 \section{Implementation}
 \begin{itemize}
-    \item Scrapy -  version 2.6.1
-    \item Selenium - version 4.1.5
-    \item Webdriver\_manager - version 3.5.4
-    \item Numpy -  version 1.22.3
-    \item Pandas  - version 1.4.2
-    \item Time
-    \item Datetime
-    \item Openpyxl - version 3.0.9
-    \item Tk (tkinter) - version 0.1.0
-    \item Pillow - version 9.1.1
+    \item \pkg[Scrapy] -  version $2.6.1$
+    \item \pkg[Selenium] - version $4.1.5$
+    \item \pkg[Webdriver\_manager] - version $3.5.4$
+    \item \pkg[Numpy] -  version $1.22.3$
+    \item \pkg[Pandas]  - version $1.4.2$
+    \item \pkg[Time]
+    \item \pkg[Datetime]
+    \item \pkg[Openpyxl] - version $3.0.9$
+    \item \pkg[Tk (tkinter)] - version $0.1.0$
+    \item \pkg[Pillow] - version $9.1.1$
 \end{itemize}
 
 \subsection{Structure of the project}
 
 \subsection{Implementation of the webscrapping}
 
-\subsection{Implementation of the GUI}
+\subsection{Implementation of the \ac{gui}}
 
 \subsubsection{Organizing the scrapped data}
-The first step to building the GUI is organizing the data with which we will be working.
-We first analyse the dataset and then clean it for the GUI to function correctly.
-This is done at the beginning of the program main.py. \par
+The first step to building the \ac{gui} is organizing the data with which we will be working.
+We first analyze the dataset and then clean it for the \ac{gui} to function correctly.
+This is done at the beginning of the program main.py.
+
 In this program, we first load the dataset. 
 Then we print the headings and the description to check the data and the types.
-We proceed to split the address from the zipcode, to get the zip code in a separate column. 
-We do this as we want to be able to search properties within a certain zipcode. 
-We then remove variables that are mispelled or uncorrect. 
-Finally we save the database. This database is the one that the GUI will use to return information to the user.
+We proceed to split the address from the zip code, to get the zip code in a separate column. 
+We do this as we want to be able to search properties within a certain zip code. 
+We then remove variables that are misspelled or incorrect. 
+Finally, we save the database. This database is the one that the \ac{gui} will use to return information to the user.
 
-\subsubsection{Building the GUI}
+\subsubsection{Building the \ac{gui}}
 
 \subsection{Maps?}
 
