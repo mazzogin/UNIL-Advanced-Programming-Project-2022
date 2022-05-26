@@ -8,7 +8,7 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/mazzogin/UNIL-Advanced-Programming-Project-2022/issues)
+[![GitHub Issues](https://img.shields.io/badge/issues-0%20open-success)](https://github.com/mazzogin/UNIL-Advanced-Programming-Project-2022/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/mazzogin/UNIL-Advanced-Programming-Project-2022/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
@@ -34,7 +34,10 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+This project serves three purposes:
+1. Create a web scraper to obtain data from the swiss real estate platform comparis
+2. Use said data to create a prototype of a platform where houses can be selected without being distracted by pretty pictures and by focusing on the facts
+3. Provide data for our sister project. Find more information regarding the latter project [here](https://github.com/mazzogin/UNIL-Advanced-Data-Analysis-Project-2022)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
