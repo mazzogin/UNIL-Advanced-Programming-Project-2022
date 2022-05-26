@@ -82,6 +82,7 @@ Below a list of all the packages plus their respective versions that were used c
 \end{forest}
 
 \subsection{Implementation of the Web Scraper}
+\label{implementationscraper}
 As mentioned previously, the web scraping was done by utilizing two different tools, \pkg[Scrapy] and \pkg[Selenium].
 When programming the spider, the main challenge was to implement the vision of what it should do. 
 When called, the spider should be able to do the following:
@@ -102,7 +103,9 @@ When called, the spider should be able to do the following:
 Before explaining how the main spider was built,
 a brief explanation of how the \acs*{url} of every single property was obtained without getting \acs*{ip}-blocked.
 
+\vspace*{5pt}
 \subsubsection{Obtaining the List of \acsp*{url}}
+\label{scrape1}
 Web scraping turned out to be a mix of close investigation of \acs*{html} source codes, 
 creative problem solving and a lot of trial and error. 
 Obtaining all the property \acsp*{url} was a clear example of this.
@@ -121,13 +124,16 @@ in the search field.
     \centerline{
         \includegraphics[width = 60mm]{prog_3.png}}
     \caption{Inspect Elements on Browser}
-    \label{fig:listing}
+    \label{fig:inspectelement}
 \end{figure}
 
 From there on, \pkg[Selenium] will pass the "current state" (i.e. state of \acs*{html} after \js manipulation)
 to the spider for the analysis.
 The spider then yields the ID's and creates \acsp*{url} by adding them to the end of the path component of the \acs*{url}
-(which is how Comparis refers to their detail pages). 
+(which is how Comparis refers to their detail pages).
+The data is subsequently saved as \pkg[.csv] to the "data" folder under the name \pkg[property\_codes\_YYYYMMDD.csv].
+Adding the current date to the name is necessary with regards to the possibility 
+of creating a database that scrapes the web regularly for available real estate.
 
 \begin{figure}[htbp]
     \centerline{
@@ -136,19 +142,48 @@ The spider then yields the ID's and creates \acsp*{url} by adding them to the en
     \label{fig:listing}
 \end{figure}
 
+\vspace*{5pt}
 \subsubsection{Creating the "property-scraper" Spider}
 Whilst the idea of combining two different web scraping services into one project came up early on,
 a first instance of a working example was presented in an article on towardsdatascience.com\cite{reusovaWebScrapingLess2019}
 However, the given example had to be heavily adapted, especially since in this project, 
 using the \pkg[ItemLoader] was of high importance.
-As aforementioned, the \pkg[ItemLoader] allows for efficient input- and output processing of data obtained from scraping \acs*{html}. 
+The \pkg[ItemLoader] allows for efficient input- and output processing of data obtained from scraping \acs*{html} \cite{ScrapyTutorialScrapy}. 
 The goal was that the data required a minimum of cleaning (i.e. no extraction of text, no deletion of \acs*{html} tags outside of the spider).
 The following lines will explain how this goal was reached.
 
-One of the most important
+Given that the spider is a class, the user needs to define its methods. 
+The \pkg[def \_\_init\_\_()] method is not required, since the \pkg[scrapy.Spider] inherits it already.
+Following the outline given in \ref{implementationscraper},
+a browser window using  \pkg[Selenium] is opened.
+Using a \pkg[for] loop, the \acsp*{url} in \pkg[property\_codes.csv] are passed to \pkg[Selenium],
+which navigates to every single website and scrolls to the bottom of the page to, again, activate the \js's.
+From there on, the source code is passed to the \pkg[ItemLoader] which processes the $22$ required fields.
+The data is yielded all at once and put into a \pkg[.csv] file (again along with the current date).
 
+\vspace*{5pt}
+\subsubsection{Implementation of the ItemLoader}
+\label{itemloader}
+An intermediary step which has been overlooked thus far is the creation of the \pkg[ItemLoader] in the \pkg[items.py] file.
+While writing the \pkg[property-scraper] spider, it was necessary to identify the fields that needed to be scraped.
+As is customary in programming, there are many ways to get the same result, 
+and the same goes for selecting fields within an \acs*{html}.
+The two main ways to identify an \acs*{html} element are the CSS and XPATH selectors 
+(for more information regarding \acs*{html} selectors, please refer to 
+\href{https://medium.com/geekculture/how-to-parse-a-webpage-using-selectors-scraping-with-dfb3894cff58}{this blog post}).
 
+For this project XPATH's were selected mainly because of ease of use.
+After gathering all the required XPATH's (they can be verified individually using "Inspect" on the website)
 
+In \pkg[items.py] every field that is scraped is assigned to a variable which processes the input and output.
+As a consequence the \pkg[ItemLoader] is created.
+Whilst \pkg[Scrapy] provides the user with six different input processors such as \pkg[TakeFirst()] or \pkg[MapCompose()].
+These work like normal functions \cite{sDemystifyingScrapyItem2020} and custom functions can be added, 
+which is exactly what was also done in this project.
+This was done on a trial and error basis and ensured that the scraped data came out as clean as possible.
+
+By importing the class \pkg[ComparisWebscraperItem] into the \pkg[comparis\_scraper.py] file, the \pkg[ItemLoader] 
+could be put to use.
 
 \subsection{Implementation of the \ac{gui}}
 
@@ -163,6 +198,7 @@ We then proceed to split the address from the zip code, to get the zip code in a
 We do this as we want to be able to search properties within a certain zip code. 
 Finally we save the dataset. This dataset is the one that the GUI will use to return information to the user.
 
+\vspace*{5pt}
 \subsubsection{Building the \ac{gui}}
 
 To build the \ac{gui} we created a new program named main4.py.
