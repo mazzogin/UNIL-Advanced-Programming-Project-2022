@@ -4,7 +4,25 @@
 
 \begin{document}
 
-\section{Conclusion}
+\section{Maintenance and Upkeep}
+The project is based on data that evolves multiple times a day. 
+Therefore running all the project s programs daily is recommended to have the latest data and the corresponding \ac{gui}. 
+Moreover, a time stamp will be added so that the old datasets and new datasets can be merged. 
+This will give a clearer overview of the housing market. \par
+When re-running the webscrapper, the framework should be maintained identically to ensure all file names and variable names stay the same. 
+This will ensure the accuracy of the algorithms which are based on the webscrapped datasets and hence, an accurate outcome for the \ac{gui}. \par
+The codebase for this project can be found on its Github public repository. 
+The repositary contains a detailed \pkg[readme.md] file explaining the objective, the structure of the project and the packages that are needed to set up the project. 
+All the datasets and programs can be found with detailed comments and explanations.\par
+Special attention should be brought to the numerous packages that are needed to carry out the project. 
+These packages should be updated regularly. The instances and methods used should also be modified in accordance to the packages to avoid paths being deprecated.\par
+Finally, as the database grows the \ac{gui} might have to be modified. The \pkg[tkinter] package has difficulty handling large datasets.
+Therefore, a migration to a more powerful \ac{gui} might be necessary.
+
+\subsection{Scrapy}
 \subsection{Subsection}
+
+\subsection{GUI}
+
 
 \end{document}
