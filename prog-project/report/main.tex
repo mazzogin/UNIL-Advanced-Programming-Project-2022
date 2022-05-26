@@ -36,8 +36,6 @@
 
 \graphicspath{{img/}}
 
-\usetikzlibrary{decorations.markings}
-
 \newcommand{\scriptO}{\mathcal{O}}
 \newcommand{\inv}{^{-1}}
 \newcommand{\range}{\mathcal{R}}
@@ -68,7 +66,8 @@
 \newcommand{\scrapy}{\hspace{-8pt} \pkg[Scrapy]\xspace \hspace{-8pt} }
 \newcommand{\selenium}{\hspace{-8pt} \pkg[Selenium]\xspace \hspace{-8pt} }
 \newcommand{\tkinter}{\hspace{-8pt} \pkg[tkinter] \xspace \hspace{-8pt}}
-
+\newcommand{\yes}{edge node [above] {yes}}
+\newcommand{\no}{edge  node [left]  {no}}
 
 \NewDocumentCommand{\hly}{ O{}}{\colorbox{yellow}{#1}}
 % Inserts graphic with the exact command the template used
@@ -154,6 +153,28 @@
     short = JSON,
     long = JavaScript Object Notation,
 }
+
+%---------------------------------------------%
+%               Tikz Settings                 %
+%---------------------------------------------%
+
+\tikzset{
+    base/.style = {draw, text width=2cm, align=center, minimum height=0.5cm},
+   startstop/.style = {base, rounded corners}, 
+     process/.style = {base}, 
+    decision/.style = {diamond, aspect=1.3, base, inner xsep=0pt, align=flush center}, 
+   connector/.style = {shape=signal,signal to=south, base, text width=1cm}, 
+        line/.style = {draw, -Latex}, 
+       input/.style = {trapezium, trapezium stretches body,
+                       trapezium left angle=70, trapezium right angle=110,
+                       base}
+        arrow/.style = {thick,->,>=stealth}
+}
+
+\usetikzlibrary{arrows.meta, 
+                chains,
+                positioning,
+                shapes}
 
 %---------------------------------------------%
 %               Main Document                 %
