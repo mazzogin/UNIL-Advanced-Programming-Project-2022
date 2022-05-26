@@ -5,6 +5,10 @@
 \begin{document}
 
 \section{Implementation}
+The \pkg[Scrapy]/\pkg[Selenium] web scraper is located on a Github repository.
+
+
+
 \begin{itemize}
     \item \pkg[Scrapy] -  version $2.6.1$
     \item \pkg[Selenium] - version $4.1.5$
@@ -36,6 +40,7 @@ We do this as we want to be able to search properties within a certain zip code.
 Finally we save the dataset. This dataset is the one that the GUI will use to return information to the user.
 
 \subsubsection{Building the \ac{gui}}
+
 \begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
     \begin{scope}[nodes={on chain, join=by line}]
         \node[startstop] (start) {Start};
@@ -64,9 +69,6 @@ Finally we save the dataset. This dataset is the one that the GUI will use to re
         \draw [->] (pro6) |-  (in2);
         \draw [->] (pro7) |-  (in3);
     \end{scope}
-    % \draw [arrow] (dec1) |- node[anchor=west] {No} (pro1);
-    % \draw (dec1) -- {No} (pro1);
-    % \draw [arrow] (dec2) |- node[anchor=west] {No} (pro6);
 \end{tikzpicture}
 
 \subsection{Maps?}
