@@ -106,6 +106,22 @@ Finally we save the dataset. This dataset is the one that the GUI will use to re
 
 \subsubsection{Building the \ac{gui}}
 
+To build the \ac{gui} we created a new program named main4.py.
+We first defined what we wanted our \ac{gui} to do. 
+We decided, we wanted the user to be able to search for a property within a certain price range, 
+or with a specific number of rooms or within a specific zip code. 
+Thefore to build this \ac{gui} we needed to have different tabs to search for these separately.
+We also needed to be able to clear the search to be able to run the program multiple times. \par
+In the program we start by defining the characteristics of the root widget otherwise known the main window,
+such as height, width and title. We then add the notebook instance to add tabs to the interface.
+These are known as frames in tkinter. From there, we format the frames and add the labels and entries we wish to have in each tab. 
+We then add the scrollbar to the root window to be able to scroll through the returned properties if the list is long. 
+We also add a treeview instance so that the pulled data from the dataset is displayed in hierarchical and tabular structure. 
+Finally we define the fuctions that retrieve the data from the database to the interface. 
+We also add a function to clear the searched information and start anew. \par
+This is a very basic \ac{gui} to make it easier for the user to interact with the scraped data.
+The aim would be to develop the interface searches that are more complex, such as conditional searches with more than one characteristic.
+
 \begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
     \begin{scope}[nodes={on chain, join=by line}]
         \node[startstop] (start) {Start};
