@@ -35,7 +35,6 @@ We then proceed to split the address from the zip code, to get the zip code in a
 We do this as we want to be able to search properties within a certain zip code. 
 Finally we save the dataset. This dataset is the one that the GUI will use to return information to the user.
 
-<<<<<<< HEAD
 \subsubsection{Building the GUI}
 \usetikzlibrary{arrows.meta, 
                 chains,
@@ -51,6 +50,7 @@ Finally we save the dataset. This dataset is the one that the GUI will use to re
        input/.style = {trapezium, trapezium stretches body,
                        trapezium left angle=70, trapezium right angle=110,
                        base}
+        arrow/.style = {thick,->,>=stealth}
 }
 \newcommand{\yes}{edge node [above] {yes}}
 \newcommand{\no}{edge  node [left]  {no}}
@@ -73,14 +73,19 @@ Finally we save the dataset. This dataset is the one that the GUI will use to re
 \node[startstop] (start1) {End};
     \end{scope}
 \node[process, left=of dec1] (pro1) {Clean and Organize data};
-\node[process, left=of dec2] (pro7a) {Find bug};
-\node[process, left=of dec4] (pro7a) {Re-run the program};
+\node[process, left=of dec2] (pro6) {Find bug};
+\node[process, left=of dec4] (pro7) {Re-run the program};
+\draw [arrow] (dec1) |- node[anchor=west] {No} (pro1);
+\draw [arrow] (dec2) |- node[anchor=west] {No} (pro6);
+\draw [arrow] (dec4) |- node[anchor=west] {No} (pro7);
+\draw [arrow] (pro1) |- node[anchor=south](pro2);
+\draw [arrow] (pro6) |- node[anchor=south] (in2);
+\draw [arrow] (pro7) |- node[anchor=south] (in3);
 \end{tikzpicture}
     \end{figure}
-=======
+
 \subsubsection{Building the \ac{gui}}
 
->>>>>>> c03f120535655969b0bffcd869e5a7e55317a645
 \subsection{Maps?}
 
 \end{document}
