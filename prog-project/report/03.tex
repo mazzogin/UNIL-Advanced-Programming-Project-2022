@@ -1,13 +1,17 @@
 \documentclass[main]{subfiles} 
+
+
 \graphicspath{{img/}}
 
 
 \begin{document}
 
 \section{Implementation}
-The \pkg[Scrapy]/\pkg[Selenium] web scraper is located on a Github repository.
-
-
+The whole project can be found in a repository on Github.
+There the README will provide the necessary information regarding the implementation of the
+scraper as well as how to use the interface.
+All of the files were written and run in python version $3.9.12$.
+Below a list of all the packages plus their respective versions that were used can be found.
 
 \begin{itemize}
     \item \pkg[Scrapy] -  version $2.6.1$
@@ -24,7 +28,68 @@ The \pkg[Scrapy]/\pkg[Selenium] web scraper is located on a Github repository.
 
 \subsection{Structure of the project}
 
-\subsection{Implementation of the webscrapping}
+\begin{forest}
+  for tree={
+    font=\ttfamily,
+    grow'=0,
+    child anchor=west,
+    parent anchor=south,
+    anchor=west,
+    calign=first,
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+    },
+    before typesetting nodes={
+      if n=1
+        {insert before={[,phantom]}}
+        {}
+    },
+    fit=band,
+    before computing xy={l=15pt},
+  }
+[UNIL-Advanced-Programming-Project-2022
+    [comparis\_webscraper
+        [comparis\_webscraper
+            [spiders
+                [comparis\_scraper.py]
+                [property\_code\_scraper.py]
+            ]
+            [items.py]
+            [middlewares.py]
+            [pipelines.py]
+            [settings.py]
+        ]
+        [scrapy.cfg]
+    ]
+    [data
+        [database.xlsx]
+        [property\_codes.csv]
+        [property\_details.csv]
+    ]
+    [Heatmap]
+    [GUI
+        [cleaning\_database.py]
+        [zoes\_version\_1.py]
+        [zoes\_version\_2.py]
+        [zoes\_version\_3.py]
+        [zoes\_version\_4.py]
+        [zoes\_version\_5.py]
+        [zoes\_version\_5\_final.py]
+        [zoes\_version\_6\_really-final.py]
+        [zoes\_version\_6-getting-there.py]
+        [zoes\_version\_7.py]
+    ]
+    [README.md]
+    [Makefile]
+    [.gitignore]
+]
+\end{forest}
+
+\subsection{Implementation of the web scraping}
+As mentioned previously, the web scraping was done by utilizing two different tools, \pkg[Scrapy] and \pkg[Selenium].
+
+
 
 \subsection{Implementation of the \ac{gui}}
 

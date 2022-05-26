@@ -225,3 +225,5 @@ data/property_details_2022-05-24.csv
 data/property_details_2022-05-25.csv
 data/Comparis_Start_URL.html
 Comparis_Webscraper/property_codes_downloader.py
+venv_config.txt
+read_scraped_csv.ipynb
