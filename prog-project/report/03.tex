@@ -6,35 +6,36 @@
 
 \section{Implementation}
 \begin{itemize}
-    \item Scrapy -  version 2.6.1
-    \item Selenium - version 4.1.5
-    \item Webdriver\_manager - version 3.5.4
-    \item Numpy -  version 1.22.3
-    \item Pandas  - version 1.4.2
-    \item Time
-    \item Datetime
-    \item Openpyxl - version 3.0.9
-    \item Tk (tkinter) - version 0.1.0
-    \item Pillow - version 9.1.1
+    \item \pkg[Scrapy] -  version $2.6.1$
+    \item \pkg[Selenium] - version $4.1.5$
+    \item \pkg[Webdriver\_manager] - version $3.5.4$
+    \item \pkg[Numpy] -  version $1.22.3$
+    \item \pkg[Pandas]  - version $1.4.2$
+    \item \pkg[Time]
+    \item \pkg[Datetime]
+    \item \pkg[Openpyxl] - version $3.0.9$
+    \item \pkg[Tk (tkinter)] - version $0.1.0$
+    \item \pkg[Pillow] - version $9.1.1$
 \end{itemize}
 
 \subsection{Structure of the project}
 
 \subsection{Implementation of the webscrapping}
 
-\subsection{Implementation of the GUI}
+\subsection{Implementation of the \ac{gui}}
 
 \subsubsection{Organizing the scrapped data}
-The first step to building the GUI is organizing the data that we obtain from the webscrapping.
-We first analyse the dataset and then clean it for the GUI to function correctly.
-This is done in the program cleaning_database.py which we also use to do the data analysis in our parallel project. \par
+The first step to building the \ac{gui} is organizing the data that we obtain from the web scraping.
+We first analyze the dataset and then clean it for the GUI to function correctly.
+This is done in the program cleaning\_database.py which we also use to do the data analysis in our parallel project. \par
 In this cleaning program, we first load the dataset. 
 Then we print the headings and the description to check the data and the types.
-We remove variables that are mispelled, uncorrect or missing. 
-We thenproceed to split the address from the zipcode, to get the zip code in a separate column. 
-We do this as we want to be able to search properties within a certain zipcode. 
+We remove variables that are misspelled, incorrect or missing. 
+We then proceed to split the address from the zip code, to get the zip code in a separate column. 
+We do this as we want to be able to search properties within a certain zip code. 
 Finally we save the dataset. This dataset is the one that the GUI will use to return information to the user.
 
+<<<<<<< HEAD
 \subsubsection{Building the GUI}
 \usetikzlibrary{arrows.meta, 
                 chains,
@@ -76,6 +77,10 @@ Finally we save the dataset. This dataset is the one that the GUI will use to re
 \node[process, left=of dec4] (pro7a) {Re-run the program};
 \end{tikzpicture}
     \end{figure}
+=======
+\subsubsection{Building the \ac{gui}}
+
+>>>>>>> c03f120535655969b0bffcd869e5a7e55317a645
 \subsection{Maps?}
 
 \end{document}
