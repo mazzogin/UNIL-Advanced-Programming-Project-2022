@@ -25,15 +25,15 @@
 \subsection{Implementation of the GUI}
 
 \subsubsection{Organizing the scrapped data}
-The first step to building the GUI is organizing the data with which we will be working.
+The first step to building the GUI is organizing the data that we obtain from the webscrapping.
 We first analyse the dataset and then clean it for the GUI to function correctly.
-This is done at the beginning of the program main.py. \par
-In this program, we first load the dataset. 
+This is done in the program cleaning_database.py which we also use to do the data analysis in our parallel project. \par
+In this cleaning program, we first load the dataset. 
 Then we print the headings and the description to check the data and the types.
-We proceed to split the address from the zipcode, to get the zip code in a separate column. 
+We remove variables that are mispelled, uncorrect or missing. 
+We thenproceed to split the address from the zipcode, to get the zip code in a separate column. 
 We do this as we want to be able to search properties within a certain zipcode. 
-We then remove variables that are mispelled or uncorrect. 
-Finally we save the database. This database is the one that the GUI will use to return information to the user.
+Finally we save the dataset. This dataset is the one that the GUI will use to return information to the user.
 
 \subsubsection{Building the GUI}
 
