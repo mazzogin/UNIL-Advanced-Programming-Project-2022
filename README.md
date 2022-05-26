@@ -35,8 +35,8 @@
 ## 🧐 About <a name = "about"></a>
 
 This project serves three purposes:
-1. Create a web scraper to obtain data from the swiss real estate platform comparis
-2. Use said data to create a prototype of a platform where houses can be selected without being distracted by pretty pictures and by focusing on the facts
+1. Create a python web scraper that obtains detailed data from the swiss real estate platform comparis
+2. Use said data to create a prototype of a platform using `Tk`(`tkinter`) where houses can be selected without being distracted by pretty pictures and by focusing on the facts
 3. Provide data for our sister project. Find more information regarding the latter project [here](https://github.com/mazzogin/UNIL-Advanced-Data-Analysis-Project-2022)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
