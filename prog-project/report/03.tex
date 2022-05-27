@@ -27,7 +27,7 @@ Below a list of all the packages plus their respective versions that were used c
 \end{itemize}
 
 \subsection{Structure of the project}
-
+{ \footnotesize
 \begin{forest}
   for tree={
     font=\ttfamily,
@@ -68,19 +68,27 @@ Below a list of all the packages plus their respective versions that were used c
         [property\_details.csv]
     ]
     [GUI
+        [gui\_data
+            [data.xlsx]
+            [MeanPriceRooms.xlsx]
+            [MeanPriceZip.xlsx]
+        ]
         [cleaning\_database.py]
-        [zoes\_version\_1.py]
-        [zoes\_version\_2.py]
-        [zoes\_version\_3.py]
-        [zoes\_version\_4.py]
+        [graphs\_GUI.py]
+        [main.py]
     ]
-    [Heatmap]
+    [Heatmap
+        [PLZO\_SHP\_LV95]
+        [MAP1.py]
+        [data.xlsx]
+    ]
     [README.md]
     [Makefile]
     [.gitignore]
     [.git]
 ]
 \end{forest}
+}
 
 \subsection{Implementation of the Web Scraper}
 \label{implementationscraper}
@@ -101,8 +109,9 @@ When called, the spider should be able to do the following:
     \pkg[.csv] file with the download date in the name
 \end{enumerate}
 
-Before explaining how the main spider was built,
-a brief explanation of how the \acs*{url} of every single property was obtained without getting \acs*{ip}-blocked.
+Before explaining how the main spider (\pkg[property\_scraper]) was built,
+we provide a brief explanation of how the \acs*{url} of every single property 
+was obtained without getting \acs*{ip}-blocked.
 
 \vspace*{5pt}
 \subsubsection{Obtaining the List of \acsp*{url}}
@@ -112,10 +121,10 @@ creative problem solving and a lot of trial and error.
 Obtaining all the property \acsp*{url} was a clear example of this.
 
 Although on a smaller scale, 
-it also required a combination of \pkg[Scrapy] and \pkg[Selenium] in order to trigger the \js's.
+it also required a combination of \pkg[Scrapy] and \pkg[Selenium] in order to trigger the JavaScriptss.
 
-When a user runs a search on Comparis (e.g. house for purchase in a specific location), 
-the website will filter through all the listings and return the corresponding properties.
+When a user runs a search on Comparis (e.g. for a house for purchase in a specific location), 
+the website will filter through \textbf{all} the listings and return the corresponding properties.
 If the user triggers the \js by scrolling, Comparis will load a \acs*{json} 
 containing the unique ID's of \textbf{all} search results at the bottom of their \acs*{html}.
 This can be seen when right clicking on the page and selecting "Inspect" and entering \pkg[\_\_NEXT\_DATA\_\_] 
@@ -146,26 +155,27 @@ of creating a database that scrapes the web regularly for available real estate.
 \vspace*{5pt}
 \subsubsection{Creating the "property-scraper" Spider}
 Whilst the idea of combining two different web scraping services into one project came up early on,
-a first instance of a working example was presented in an article on towardsdatascience.com\cite{reusovaWebScrapingLess2019}
-However, the given example had to be heavily adapted, especially since in this project, 
+a first instance of a working example was presented in an article on towardsdatascience.com\cite{reusovaWebScrapingLess2019}.
+However, the given example had to be heavily adapted, especially since in our project, 
 using the \pkg[ItemLoader] was of high importance.
 The \pkg[ItemLoader] allows for efficient input- and output processing of data obtained from scraping \acs*{html} \cite{ScrapyTutorialScrapy}. 
 The goal was that the data required a minimum of cleaning (i.e. no extraction of text, no deletion of \acs*{html} tags outside of the spider).
 The following lines will explain how this goal was reached.
 
 Given that the spider is a class, the user needs to define its methods. 
-The \pkg[def \_\_init\_\_()] method is not required, since the \pkg[scrapy.Spider] inherits it already.
-Following the outline given in \ref{implementationscraper},
+The \pkg[def \_\_init\_\_()] method is not required, since the \pkg[scrapy.Spider] inherits it already 
+from its parent class.
+Following the outline given in section \ref{implementationscraper},
 a browser window using  \pkg[Selenium] is opened.
 Using a \pkg[for] loop, the \acsp*{url} in \pkg[property\_codes.csv] are passed to \pkg[Selenium],
-which navigates to every single website and scrolls to the bottom of the page to, again, activate the \js's.
+which navigates to every single website and scrolls to the bottom of the page to, again, activate the \jss.
 From there on, the source code is passed to the \pkg[ItemLoader] which processes the $22$ required fields.
 The data is yielded all at once and put into a \pkg[.csv] file (again along with the current date).
 
 \vspace*{5pt}
 \subsubsection{Implementation of the ItemLoader}
 \label{itemloader}
-An intermediary step which has been overlooked thus far is the creation of the \pkg[ItemLoader] in the \pkg[items.py] file.
+An intermediary step which has been overlooked thus far is the creation of the \pkg[ItemLoader] within the \pkg[items.py] file.
 While writing the \pkg[property-scraper] spider, it was necessary to identify the so-called fields within the \acs*{html}
 that needed to be scraped.
 As is customary in programming, there are many ways to get the same result, 
@@ -176,7 +186,7 @@ The two main ways to identify an \acs*{html} element are known as the CSS and XP
 \href{https://medium.com/geekculture/how-to-parse-a-webpage-using-selectors-scraping-with-dfb3894cff58}{this blog post}).
 
 For this project XPATH's were selected mainly because of ease of use.
-The compact syntax which offers a quick way to finding data within the \acs*{html} was thus a decisive factor.
+The compact syntax offers a quick way to find data within the \acs*{html} and was thus a decisive factor.
 After gathering all the required XPATH's (which can be verified individually using "Inspect" on the website), 
 they were added to the \pkg[items.py] file.
 
@@ -202,37 +212,39 @@ and is assigned to a variable that processes the input and output.
 % \end{python}\captionof*{python}{Test}
 
 As a consequence the \pkg[ItemLoader] is created.
-\pkg[Scrapy] provides the user with six different input processors such as \pkg[TakeFirst()] or \pkg[MapCompose()].
+\pkg[Scrapy] provides the user with six different input processors,
+including  \pkg[MapCompose()] which was used extensively.
 These work like normal functions \cite{sDemystifyingScrapyItem2020}.
-If need be, custom functions can be added, which was done in this project.
+If need be, custom functions can be added, which was also done extensively in this project.
 
-For example, in figure \ref{fig:itemloader} the definition of a field in the \pkg[ItemLoader] 
-can be seen in action.
+For illustration purposes we provide figure \ref{fig:itemloader}. 
+There the definition of a field in the \pkg[ItemLoader] can be seen in action.
 
-When scraping an \acs*{html} field, there are broadly two scenarios:
+When scraping an \acs*{html} field, there are two broad scenarios:
 \begin{enumerate}
     \item The field is available on every website's \acs*{html}
     \begin{itemize}
-        \item As is the case with fields that contain price, square meters or address
+        \item This is the case with fields that contain price, square meters or address for example
     \end{itemize}
     \item The field is only available sometimes
     \begin{itemize}
-        \item …and is of categorical nature (i.e. does the property have a washing machine (Yes/No)?)
-        \item …has content that needs to be scraped (i.e. the construction year, if present, will be scraped)
+        \item …and is of categorical nature (e.g. \textit{"Does the property have a washing machine (Yes/No)?"})
+        \item …has content that needs to be scraped (e.g. the construction year, if present, will be scraped)
     \end{itemize}
 \end{enumerate}
 
-When scraping the field "address" (so scenario $1$ applies) several input- and output processors are defined.
-The input processor is primarily \pkg[MapCompose()] and \pkg[remove\_tags].
+When scraping the field "address" (scenario $1$ applies) several input- and output processors are defined (see figure \ref{fig:itemloader}).
+The input processor is primarily \pkg[MapCompose()] and \pkg[remove\_tags.]
 The latter is technically a function and is imported from the \pkg[w3lib.html] library.
 In figure \ref{fig:itemloader} \pkg[remove\_string] and  \pkg[remove\_comma] can also be seen.
-They are instances of custom functions that were added to the \pkg[items.py] file in the process of scraping.
+They are instances of custom functions that were defined manually 
+in the \pkg[items.py] file during the process of scraping.
 As with the \pkg[remove\_tags] they can then be passed to the \pkg[MapCompose()] processor.
-
 This worked very well for fields which were always present (i.e. price, address, square meters etc.).
-However, how to deal with fields that are not always present, 
-like whether the apartment is equipped with a washing machine or not?
-This seemingly complicated problem can be solved with three lines of code.
+
+However, how does one deal with fields that are not always present
+(e.g. fields that state whether the apartment is equipped with a washing machine or not)?
+This seemingly complicated problem can be resolved quickly with three lines of code:
 
 \begin{figure}[htbp]
     \centerline{
@@ -327,6 +339,5 @@ More graphs could also be displayed to give diverse information to the user.
     \end{scope}
 \end{tikzpicture}
 
-\subsection{Maps?}
 
 \end{document}
