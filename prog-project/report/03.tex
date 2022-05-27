@@ -165,22 +165,75 @@ The data is yielded all at once and put into a \pkg[.csv] file (again along with
 \subsubsection{Implementation of the ItemLoader}
 \label{itemloader}
 An intermediary step which has been overlooked thus far is the creation of the \pkg[ItemLoader] in the \pkg[items.py] file.
-While writing the \pkg[property-scraper] spider, it was necessary to identify the fields that needed to be scraped.
+While writing the \pkg[property-scraper] spider, it was necessary to identify the so-called fields within the \acs*{html}
+that needed to be scraped.
 As is customary in programming, there are many ways to get the same result, 
 and the same goes for selecting fields within an \acs*{html}.
-The two main ways to identify an \acs*{html} element are the CSS and XPATH selectors 
+
+The two main ways to identify an \acs*{html} element are known as the CSS and XPATH selectors 
 (for more information regarding \acs*{html} selectors, please refer to 
 \href{https://medium.com/geekculture/how-to-parse-a-webpage-using-selectors-scraping-with-dfb3894cff58}{this blog post}).
 
 For this project XPATH's were selected mainly because of ease of use.
-After gathering all the required XPATH's (they can be verified individually using "Inspect" on the website)
+The compact syntax which offers a quick way to finding data within the \acs*{html} was thus a decisive factor.
+After gathering all the required XPATH's (which can be verified individually using "Inspect" on the website), 
+they were added to the \pkg[items.py] file.
 
-In \pkg[items.py] every field that is scraped is assigned to a variable which processes the input and output.
+In \pkg[items.py] every \acs*{html} field that needs to be scraped is of class \pkg[scrapy.Item] 
+and is assigned to a variable that processes the input and output.
+
+
+\begin{figure}[htbp]
+    \centerline{
+        \includegraphics[width = 85mm]{prog_5.png}}
+    \caption{Defining an Item}
+    \label{fig:itemloader}
+\end{figure}
+
+
+% \begin{python}
+% class ComparisWebscraperItem(scrapy.Item):
+%     address = scrapy.Field
+%         input_processor = MapCompose(remove_tags, 
+%                                     remove_string, 
+%                                     remove_comma), 
+%         output_processor = Join()
+% \end{python}\captionof*{python}{Test}
+
 As a consequence the \pkg[ItemLoader] is created.
 Whilst \pkg[Scrapy] provides the user with six different input processors such as \pkg[TakeFirst()] or \pkg[MapCompose()].
 These work like normal functions \cite{sDemystifyingScrapyItem2020} and custom functions can be added, 
 which is exactly what was also done in this project.
-This was done on a trial and error basis and ensured that the scraped data came out as clean as possible.
+
+For example, in figure \ref{fig:itemloader} the definition of a field can be seen in action.
+When scraping the field "address" (which is always present, regardless of the website)
+several input- and output processors are defined.
+The input processor is primarily \pkg[MapCompose()] and \pkg[remove\_tags].
+The latter is technically a function and is imported from the \pkg[w3lib.html] library.
+If the standard input processors and functions do not suffice,
+the user can always define further functions within the \pkg[items.py] file.
+As with the \pkg[remove\_tags] they can then be passed to the \pkg[MapCompose()] processor, 
+which was done extensively.
+
+This worked very well for fields which were always present (i.e. price, address, square meters etc.).
+However, how to deal with fields that are not always present, 
+like whether the apartment is equipped with a washing machine or not?
+This seemingly complicated problem can be solved with three lines of code.
+
+\begin{figure}[htbp]
+    \centerline{
+        \includegraphics[width = 85mm]{prog_6.png}}
+    \caption{Function for fields that are not always present}
+    \label{fig:ispresentornot}
+\end{figure}
+
+Here the properties of both the XPATH and the functions are leveraged.
+The XPATH of a given field, for example the one for the "elevator" field, 
+will only return a result when it finds the keyword "Ascenseur" within a specific range of the \acs*{html}.
+Given this property of the XPATH and given that the keywords are always the same, 
+it is natural to write a function that can evaluate this binary problem.
+The function in figure \ref{ispresentornot} returns \pkg[True] when the keyword is found,
+and an empty value (\pkg[N/A]) otherwise.
 
 By importing the class \pkg[ComparisWebscraperItem] into the \pkg[comparis\_scraper.py] file, the \pkg[ItemLoader] 
 could be put to use.
@@ -191,7 +244,7 @@ could be put to use.
 The first step to building the \ac{gui} is organizing the data that we obtain from the web scraping.
 For this step we use the same progam than in our parallele data analysis project, named \pkg[cleaning\_database\_\ac{gui}.py].
 We first analyze the two separate datasets that we obtained from the scraping. 
-These are named \pkg[property\_codes.cvs] and \pkg[property\_details.cvs].
+These are named \pkg[property\_codes.csv] and \pkg[property\_details.csv].
 We analyze them by printing the headings and the description to check the data and the types.
 We then merge them. After this, we sort through the values, removing all the missing variables and errors. 
 We create dummy variables for the variables that might be interesting for graphs or regression analysis.

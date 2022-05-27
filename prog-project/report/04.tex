@@ -7,29 +7,54 @@
 \section{Maintenance and Upkeep}
 
 The project is based on data that evolves multiple times a day. 
-Therefore running all the project s programs daily is recommended to have the latest data and the corresponding \ac{gui}. 
-Moreover, a time stamp will be added so that the old datasets and new datasets can be merged. 
+Therefore running all the project's programs daily is recommended to have the latest data and the corresponding \ac{gui}. 
+Moreover, the time stamps automatically ensure a chronological order and could make multivariate time series analysis possible.
 This will give a clearer overview of the housing market. \par
 When re-running the webscrapper, the framework should be maintained identically to ensure all file names and variable names stay the same. 
 This will ensure the accuracy of the algorithms which are based on the webscrapped datasets and hence, an accurate outcome for the \ac{gui}. \par
 The codebase for this project can be found on its Github public repository. 
-The repositary contains a detailed \pkg[readme.md] file explaining the objective, the structure of the project and the packages that are needed to set up the project. 
+The repository contains a detailed \pkg[readme.md] file explaining the objective, 
+the structure of the project and the packages that are needed to set up the project. 
 All the datasets and programs can be found with detailed comments and explanations.\par
 Special attention should be brought to the numerous packages that are needed to carry out the project. 
-These packages should be updated regularly. The instances and methods used should also be modified in accordance to the packages to avoid paths being deprecated.
+These packages should be updated regularly. 
+The instances and methods used should also be modified in accordance to the packages to avoid paths being deprecated.
 The website which we base our scrapping on should also be checked for any updates or changes in its framework, 
 as this could potentially block the webscrapping program. Hence the whole project would be affected.\par
-Finally, as the database grows the \ac{gui} might have to be modified. The \pkg[tkinter] package has difficulty handling large datasets.
+Finally, as the database grows the \ac{gui} might have to be modified. 
+The \pkg[tkinter] package has difficulty handling large datasets.
 Therefore, a migration to a more powerful \ac{gui} might be necessary.
 
-
 \subsection{Web Scraper}
-    
+The efficacy of the web scraper stands and falls with the structure of the website.
+This iteration of the comparis webscraper is adapted only to the real estate section of the website.
+This means the data in any location within any radius can be scraped with this web scraper.
+Should there be an additional datapoint of interest,
+it would need to be added in three steps:
+\begin{enumerate}
+    \item Identifying the field
+    \begin{itemize}
+        \item Is it available on every page?
+        \item If yes, then 
+    \end{itemize}
+    \item By using "Inspect" (see figure \ref{fig:inspectelement}) and the search bar in the \ac*{html}, write an XPATH pointing to the required field.
+    \item Add the field to the \pkg[items.py] file and thus, add it to the \pkg[ItemLoader]
+\end{enumerate}
 
+
+\begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
+    \begin{scope}[nodes={on chain, join=by line}]
+    \node[startstop] (start) {Start};
+    \node[input] (in1) {Identify the required field (by CSS or XPATH)};
+    \node[decision] (dec1) {Is the field available on every page?};
+    \end{scope}
+    \end{tikzpicture}
 
 \subsection{Dataset}
 
 \subsection{GUI}
+
+\section{Where to Go From Here?}
 
 
 
