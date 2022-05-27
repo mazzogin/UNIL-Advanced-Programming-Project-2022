@@ -64,7 +64,7 @@ The way \pkg[requests] works is that it sends a GET request to the website and s
 However, simply sending a request is not enough to trigger a \js since it needs interaction from the user to generate the content and thus, 
 "add" source code.
 The source code returned by \pkg[requests] for \js heavy websites generally offers very limited insights.
-A common workaround is the scraping the "hidden API" \hly[cite].
+A common workaround is the scraping the "hidden API" \cite{johnwatsonrooneyAlwaysCheckHidden2021} \cite{eWebScrapingBeginners2019}.
 Said "hidden API" consists of a \acs*{json} file which, in certain cases contains all the information the \js would generate based on the user action.
 Since this  \acs*{json} has its own \acs*{url}, \pkg[requests] can get the data from there, 
 and therefore effectively get around the "\js barrier".
