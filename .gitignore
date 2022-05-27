@@ -227,3 +227,6 @@ data/Comparis_Start_URL.html
 Comparis_Webscraper/property_codes_downloader.py
 venv_config.txt
 read_scraped_csv.ipynb
+GUI/main.py
+GUI/main2.py
+GUI/main4.py
