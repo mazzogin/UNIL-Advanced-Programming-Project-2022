@@ -14,8 +14,8 @@ import pandas as pd
 # What do we fill the N/A's with and how do we declare which floor the ground floor is on (logically it would  be 0 obviously, 
 # but then what do we put into the N/A's)?
 
-property_codes = pd.read_csv(r'/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/data/property_codes.csv')
-property_details = pd.read_csv(r'/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/data/property_details.csv')
+property_codes = pd.read_csv(r'data/property_codes.csv')
+property_details = pd.read_csv(r'data/property_details.csv')
 
 
 database = pd.concat([property_codes, property_details], axis=1)
@@ -165,6 +165,6 @@ database = database.drop(['property_codes','address','available_from', 'prim_sch
               'floor','closest_shop','highway','kindergarten','public_transp','secon_school'], axis=1)
 
 
-database.to_excel('/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/GUI/data.xlsx')
+database.to_excel('GUI/gui_data/data.xlsx')
 
 
