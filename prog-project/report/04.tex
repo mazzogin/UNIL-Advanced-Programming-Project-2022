@@ -31,14 +31,20 @@ This iteration of the comparis webscraper is adapted only to the real estate sec
 This means the data in any location within any radius can be scraped with this web scraper.
 Should there be an additional datapoint of interest,
 it would need to be added in three steps:
+
 \begin{enumerate}
     \item Identifying the field
     \begin{itemize}
         \item Is it available on every page?
-        \item If yes, then 
+        \item If yes, the implementation will 
     \end{itemize}
-    \item By using "Inspect" (see figure \ref{fig:inspectelement}) and the search bar in the \ac*{html}, write an XPATH pointing to the required field.
-    \item Add the field to the \pkg[items.py] file and thus, add it to the \pkg[ItemLoader]
+    \item By using "Inspect" (see figure \ref{fig:inspectelement}) and the search bar in the \acs*{html}, write an XPATH pointing to the required field.
+    \item Add the field to the \pkg[items.py] file and thus
+    \begin{enumerate}
+        \item Define the field name
+        \item Define the input processor
+        \item Define the output processor
+    \end{enumerate}
 \end{enumerate}
 
 
@@ -48,9 +54,12 @@ it would need to be added in three steps:
     \node[input] (in1) {Identify the required field (by CSS or XPATH)};
     \node[decision] (dec1) {Is the field available on every page?};
     \end{scope}
-    \end{tikzpicture}
+\end{tikzpicture}
 
 \subsection{Dataset}
+The \pkg[.csv] files that will make up the database do not need special attention per se.
+If new fields are added however, the files cannot be "retrofitted" to the new scraper, 
+since they are snapshots of the current market environment.
 
 \subsection{GUI}
 

@@ -74,6 +74,7 @@ Below a list of all the packages plus their respective versions that were used c
         [zoes\_version\_3.py]
         [zoes\_version\_4.py]
     ]
+    [Heatmap]
     [README.md]
     [Makefile]
     [.gitignore]
@@ -201,19 +202,32 @@ and is assigned to a variable that processes the input and output.
 % \end{python}\captionof*{python}{Test}
 
 As a consequence the \pkg[ItemLoader] is created.
-Whilst \pkg[Scrapy] provides the user with six different input processors such as \pkg[TakeFirst()] or \pkg[MapCompose()].
-These work like normal functions \cite{sDemystifyingScrapyItem2020} and custom functions can be added, 
-which is exactly what was also done in this project.
+\pkg[Scrapy] provides the user with six different input processors such as \pkg[TakeFirst()] or \pkg[MapCompose()].
+These work like normal functions \cite{sDemystifyingScrapyItem2020}.
+If need be, custom functions can be added, which was done in this project.
 
-For example, in figure \ref{fig:itemloader} the definition of a field can be seen in action.
-When scraping the field "address" (which is always present, regardless of the website)
-several input- and output processors are defined.
+For example, in figure \ref{fig:itemloader} the definition of a field in the \pkg[ItemLoader] 
+can be seen in action.
+
+When scraping an \acs*{html} field, there are broadly two scenarios:
+\begin{enumerate}
+    \item The field is available on every website's \acs*{html}
+    \begin{itemize}
+        \item As is the case with fields that contain price, square meters or address
+    \end{itemize}
+    \item The field is only available sometimes
+    \begin{itemize}
+        \item …and is of categorical nature (i.e. does the property have a washing machine (Yes/No)?)
+        \item …has content that needs to be scraped (i.e. the construction year, if present, will be scraped)
+    \end{itemize}
+\end{enumerate}
+
+When scraping the field "address" (so scenario $1$ applies) several input- and output processors are defined.
 The input processor is primarily \pkg[MapCompose()] and \pkg[remove\_tags].
 The latter is technically a function and is imported from the \pkg[w3lib.html] library.
-If the standard input processors and functions do not suffice,
-the user can always define further functions within the \pkg[items.py] file.
-As with the \pkg[remove\_tags] they can then be passed to the \pkg[MapCompose()] processor, 
-which was done extensively.
+In figure \ref{fig:itemloader} \pkg[remove\_string] and  \pkg[remove\_comma] can also be seen.
+They are instances of custom functions that were added to the \pkg[items.py] file in the process of scraping.
+As with the \pkg[remove\_tags] they can then be passed to the \pkg[MapCompose()] processor.
 
 This worked very well for fields which were always present (i.e. price, address, square meters etc.).
 However, how to deal with fields that are not always present, 
@@ -232,7 +246,7 @@ The XPATH of a given field, for example the one for the "elevator" field,
 will only return a result when it finds the keyword "Ascenseur" within a specific range of the \acs*{html}.
 Given this property of the XPATH and given that the keywords are always the same, 
 it is natural to write a function that can evaluate this binary problem.
-The function in figure \ref{ispresentornot} returns \pkg[True] when the keyword is found,
+The function in figure \ref{fig:ispresentornot} returns \pkg[True] when the keyword is found,
 and an empty value (\pkg[N/A]) otherwise.
 
 By importing the class \pkg[ComparisWebscraperItem] into the \pkg[comparis\_scraper.py] file, the \pkg[ItemLoader] 
