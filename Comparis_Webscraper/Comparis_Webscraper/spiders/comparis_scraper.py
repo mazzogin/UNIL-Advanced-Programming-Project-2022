@@ -1,54 +1,70 @@
 # Scrapy
-from numpy import append
-from pandas import read_csv
 import scrapy
 from scrapy.selector import Selector
 
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-
-# Selenium
+# Selenium / Selenium related
 import selenium
-from time import sleep
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-
-from selenium.common.exceptions import NoSuchElementException
-
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from time import sleep
 
 # Other
-import pandas as pd
-
+from numpy import append
+from pandas import read_csv
 from scrapy.loader import ItemLoader
 from Comparis_Webscraper.items import ComparisWebscraperItem
+from datetime import date
+import pandas as pd
 
+###
+# Define Scrapy Spider
+###
 
 class Comparis_Spider(scrapy.Spider):
     """
-    Spider based on scrapy.Spider class.
-    This spider loops through a list of predefined URL's in the "data" folder.
-
-
+    Downloads 22 different datapoints from a list of predefined comparis.ch url's
+    
+    The list of predefined url's can be found in the 'data' folder and is named 'property_codes_"YYYY-MM-DD"'
+    This list may be changed by providing the 'id-scraper' a different URL.
     """
-    name = 'real-estate'
+
+    # Name the spider (callable from command line)
+    name = 'property-scraper'
+
+    # Just provide a website to which scrapy can connect for sure
     start_urls = ['https://httpbin.org/']
 
+    # Set the location and format of the output. 
+    # Output is a csv, the name changes based on the current date. Output directory is 'data'
+    custom_settings = {'FEEDS': {f'../../../data/property_details_{date.today()}.csv':{'format':'csv'}}}
+
     def parse(self, response):
-        self.property_codes = pd.read_csv(filepath_or_buffer='property_codes.csv')
-        #l = ItemLoader(item = ComparisWebscraperItem(), response = response)
+
+        # Get list of url's
+        self.property_codes = pd.read_csv(filepath_or_buffer='../../../data/property_codes.csv')
+
+        # Define Chrome as browser
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         
         for url in self.property_codes['url']:
+            # Navigate to url
             self.driver.get(url)
             sleep(0.8)
+
+            # Scroll to end of website to activate the javascript
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             sleep(1.5)
             
+            # Set the scrapy selector as in the id_scraper.py file
             scrapy_selector = Selector(text = self.driver.page_source)
 
+            # The scraped fields get processed here.
+            # Details on the input/output processing can be found in the items.py file
             l = ItemLoader(item = ComparisWebscraperItem(), selector = scrapy_selector)
             l.add_css('address', 'h5.css-15z12tn.ehesakb2')
             l.add_xpath('price', '//h3[@class="css-eujsoq ehesakb2"]')
@@ -74,5 +90,9 @@ class Comparis_Spider(scrapy.Spider):
             l.add_xpath('prim_school', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"École primaire")]/div/div/following-sibling::div/p/span')
             l.add_xpath('secon_school', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"École secondaire")]/div/div/following-sibling::div/p/span')
             l.add_xpath('closest_shop', '//div[@class="css-84kz1r ehesakb5"]/div/div[contains(.,"Commerces")]/div/div/following-sibling::div/p/span')
-
+            
+            # Yield scraped data from 
             yield l.load_item()
+        
+        # Quit the selenium webdriver
+        self.driver.quit()

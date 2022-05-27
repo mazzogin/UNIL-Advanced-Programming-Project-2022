@@ -213,3 +213,20 @@ data/property_details2.csv
 data/Comparis_Start_URL.html
 data/property_codes2.csv
 
+prog-project/report_template
+Heatmap/test2.html
+prog-project/report/aux/conference_071817.pdf
+prog-project/report/IEEEtran.cls
+prog-project/report/aux/01.pdf
+prog-project/report/aux/02.pdf
+prog-project/report/aux/03.pdf
+data/property_codes_2022-05-25.csv
+data/property_details_2022-05-24.csv
+data/property_details_2022-05-25.csv
+data/Comparis_Start_URL.html
+Comparis_Webscraper/property_codes_downloader.py
+venv_config.txt
+read_scraped_csv.ipynb
+GUI/main.py
+GUI/main2.py
+GUI/main4.py

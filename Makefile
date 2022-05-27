@@ -4,7 +4,7 @@
 
 
 # Path to script to fetch codes
-PATH_CODES_DOWNLOADER=Comparis_Webscraper/property_codes_downloader.py
+PATH_CODES_DOWNLOADER=Comparis_Webscraper/property_code_scraper.py
 # Path to comparis scraper
 PATH_HTML_PARSER=Comparis_Webscraper/Comparis_Webscraper/spiders
 # Path to property codes csv
@@ -13,7 +13,7 @@ PATH_PROP_DETAIL=../../../data/property_details.csv
 # Path to Comparis start html file
 PATH_START_URL=data/Comparis_Start_URL.html
 # Name of spider
-SPIDER_HTML=htmlparser
+SPIDER_CODES=id-scraper
 SPIDER_ESTATE=real-estate
 
 
@@ -36,4 +36,5 @@ clean:
 install_dep:
 	pip3 install scrapy
 	pip3 install selenium
+	pip3 install webdriver-manager
 # Add more dependencies if needed

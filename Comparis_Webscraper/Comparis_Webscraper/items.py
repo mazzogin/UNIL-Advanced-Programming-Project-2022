@@ -55,7 +55,14 @@ def remove_meters(value):
 
 
 class ComparisWebscraperItem(scrapy.Item):
-   # Primary Information Fields
+    """
+    Defines how the input from the scraped fields is processed.
+
+    Also defines how the output is processed.
+    """
+
+    # Key Data
+
     address = scrapy.Field(
         input_processor = MapCompose(remove_tags, remove_string, remove_comma), 
         output_processor = Join())
@@ -88,7 +95,7 @@ class ComparisWebscraperItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, remove_comma), 
         output_processor = TakeFirst())
     
-    # Equipement fields
+    # Equipement fields / Equipment Dummy variables
 
     balcony =  scrapy.Field(
         input_processor = MapCompose(remove_tags, parse_equipment),
@@ -122,7 +129,7 @@ class ComparisWebscraperItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, parse_equipment),
         output_processor = TakeFirst())
 
-    # Further criteria fields
+    # Further criteria fields / Places of interest in the vicinity 
 
     public_transp = scrapy.Field(
         input_processor = MapCompose(remove_tags, remove_meters),

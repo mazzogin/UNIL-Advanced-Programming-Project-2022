@@ -1,0 +1,64 @@
+\documentclass[main]{subfiles} 
+\graphicspath{{img/}}
+
+
+\begin{document}
+
+\section{Maintenance and Upkeep}
+
+The project is based on data that evolves daily. 
+Therefore running all the project's programs daily is recommended to have the latest data and the corresponding \ac{gui}. 
+Moreover, the time stamps automatically ensure a chronological order and could make multivariate time series analysis possible.
+This will give a clearer overview of the housing market. \par
+When re-running the web scraper, the framework should be maintained identically to ensure all file names and variable names stay the same. 
+This will ensure the accuracy of the algorithms which are based on the scraped datasets and hence, an accurate outcome for the \ac{gui}. \par
+The codebase for this project can be found on its Github public repository. 
+The repository contains a detailed \pkg[readme.md] file explaining the objective, 
+the structure of the project and the packages that are needed to set up the project. 
+All the datasets and programs can be found with detailed comments and explanations.\par
+Special attention should be brought to the numerous packages that are needed to carry out the project. 
+These packages should be updated regularly. 
+The instances and methods used should also be modified in accordance to the packages to avoid paths being deprecated.
+The website which we base our scraping on should also be checked for any updates or changes in its framework, 
+as this could potentially block the scraping program. Hence the whole project would be affected.\par
+Finally, as the database grows the \ac{gui} might have to be modified. 
+The \pkg[tkinter] package has difficulty handling large datasets.
+Therefore, a migration to a more powerful \ac{gui} might be necessary.
+
+\subsection{Web Scraper}
+The efficacy of the web scraper stands and falls with the structure of the website.
+This iteration of the comparis webscraper is adapted only to the real estate section of the website.
+This means the data in any location within any radius can be scraped with this web scraper.
+Should there be an additional datapoint of interest,
+it would need to be added in three steps:
+
+\begin{enumerate}
+    \item Identifying the field
+    \begin{itemize}
+        \item Is it available on every page?
+        \item If yes, the implementation will 
+    \end{itemize}
+    \item By using "Inspect" (see figure \ref{fig:inspectelement}) and the search bar in the \acs*{html}, write an XPATH pointing to the required field.
+    \item Add the field to the \pkg[items.py] file and thus
+    \begin{enumerate}
+        \item Define the field name
+        \item Define the input processor
+        \item Define the output processor
+    \end{enumerate}
+\end{enumerate}
+
+
+\subsection{GUI}
+
+\subsection{Scalability}
+In its current state, the scraper can download real estate data from any village, town, region or canton in Switzerland,
+as long as the provided \acs*{url} is from Comparis.
+Currently the code has to be activated manually.
+During the runtime of the program there is no user input required whatsoever.
+The data is stored automatically and the browser window is closed autonomously.
+
+\subsection{Where to Go From Here?}
+
+
+
+\end{document}
