@@ -17,6 +17,7 @@ import pandas as pd
 property_codes = pd.read_csv(r'/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/data/property_codes.csv')
 property_details = pd.read_csv(r'/Users/admin/Desktop/UNIL-Advanced-Programming-Project-2022/data/property_details.csv')
 
+
 database = pd.concat([property_codes, property_details], axis=1)
 
 database = database[[
