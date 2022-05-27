@@ -34,6 +34,7 @@
 \usepackage{color}              % Used for the Python environment
 \usepackage{listings}           % Used for the Python environment
 \usepackage{caption}            % Use to add caption to python environment
+\usepackage{nameref}            % 
 
 %---------------------------------------------%
 %                Environments                 %
@@ -86,7 +87,8 @@
     \end{figure}}
 
 \NewDocumentCommand{\pkg}{O{}}{
-        {\fontsize{9}{2}\selectfont{\texttt{#1}} \xspace}}
+        {\small {\texttt{#1}}}
+            \xspace}
 
 %%%
 % Python Environment
@@ -177,7 +179,7 @@ showstringspaces=false
     }
 
 \DeclareAcronym{xpath}{
-    short=XPath,
+    short=XPATH,
     long= XML Path Language,
     short-plural = s ,
     }
