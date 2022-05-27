@@ -5,6 +5,50 @@
 \begin{document}
 
 \section{Results}
-\subsection{Subsection}
+The implementation of all the programs contained in the project result in obtaining the data to build the graphical user interface \ac{gui} 
+for the user to get information on the lausanne housing market and navigate easily between available properties.
 
+\subsection{Dataset}
+The dataset we used for the building the \ac{gui} is reduced compared to all the data we initially have access to. 
+We chose to keep this reduced version of the dataset, to keep the \ac{gui} easy to use and read for the user. 
+The following image shows the the first few rows of the dataset we used.
+
+\subsection{\ac{gui}}
+The \ac{gui} presents the scrapped data in an orderly manner.
+\subsubsection{Main Window}
+The main window contains the four available tabs namely, price range, Rooms, Zip Code and Graphs and the empty treeview as shown below.
+
+\subsubsection{Frame 1}
+The first frame allows the user to search within a specific price range. 
+The user enters a minimum value and maximum value within each of the boxes and presses the search button. 
+The treeview return all the properties within chosen price range. 
+To restart the process, the user can either press the clear button or enter new values.
+
+\subsubsection{Frame 2}
+The second frame allows the user to search within a specific number of rooms. 
+The user enters a minimum value and maximum value within each of the boxes and presses the search button. 
+The treeview return all the properties within the chosen number of rooms. 
+To restart the process, the user can either press the clear button or enter new values.
+
+\subsubsection{Frame 3}
+The third frame allows the user to search for properties in a specific zip code. 
+The user enters the wished zip code in the box and presses the search button. 
+The treeview return all the properties within the chosen zip code. 
+To restart the process, the user can either press the clear button or enter a new value.
+
+\subsubsection{Frame 4}
+The fourth frame displays two buttons corresponding to two different bar graphs, 
+namely the average price by zip code and the average price by rooms.
+The user must simply press on the corresponding button and the graph is displayed. 
+figure nb displays the average price per zip code. At the time when we run the program we can see that the zip code correspnding to x
+has a much higher price. Why?+PICTURES
+
+figure nb displays the average price per rooms. At the time when we run the program we can see that the zip code correspnding to x
+has a much higher price. Why?
+
+\subsubsection{Heatmap}
+Iniatially we wanted to display a heatmap of Lausanne based on the average price by zip code. 
+This map is built with the help of the geopandas and folium packages. 
+To build it we merge the MeanPriceZip file with the geolocations of the Lausanne's zip codes. Nonetheless, 
+due to a merging and geolocation issue we were unable to display the map. 
 \end{document}
