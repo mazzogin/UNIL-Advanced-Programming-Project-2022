@@ -195,7 +195,7 @@ Label2 = Label(frame2,text="to").grid(row=1, column=2)
 entry4 = Entry(frame2)
 entry4.grid(row=1, column=3)
 
-B3= Button(frame2, text="Search",command=lambda:search_info2(float(entry3.get()),int(entry4.get()))).grid(row=1, column=5, padx=5)
+B3= Button(frame2, text="Search",command=lambda:search_info2(float(entry3.get()),float(entry4.get()))).grid(row=1, column=5, padx=5)
 B4 = Button(frame2, text="Clear", command=clear_fields)
 B4.grid(row=4, column=5)            
 ### Format tab 3
