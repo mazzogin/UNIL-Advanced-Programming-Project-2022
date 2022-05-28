@@ -96,8 +96,8 @@ def graph_it1():
     #rotate the x-labels so the zipcodes are easier to read
     plt.xticks(rotation = 90);
     plt.title("Average price by zip code")
+    plt.savefig(r'GUI/PricebyZip.png')
     plt.show()   
-    plt.savefig('GUI/PricebyZip.png')
 
 def graph_it2():
     #Style and look of my plot
@@ -109,8 +109,8 @@ def graph_it2():
     #rotate the x-labels so the zipcodes are easier to read
     plt.xticks(rotation = 90);
     plt.title("Average price by number of rooms")
+    plt.savefig(r'GUI/PricebyRooms.png')   
     plt.show()   
-    plt.savefig('GUI/PricebyRooms.png')   
      
 #config
 width = 1100
