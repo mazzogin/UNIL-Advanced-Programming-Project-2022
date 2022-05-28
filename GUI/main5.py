@@ -143,16 +143,16 @@ tab_control.add(frame3, text='Zip Code')
 tab_control.add(frame4, text='Graphs') 
     
 #open xlm
-xl_file = pd.read_excel("GUI/data.xlsx",index_col=None,engine="openpyxl",dtype="string")
+xl_file = pd.read_excel("GUI/gui_data/data.xlsx",index_col=None,engine="openpyxl",dtype="string")
 new = list(xl_file)
 
 #graph file
-data = df = pd.read_excel('GUI/MeanPriceZIP.xlsx',
+data = df = pd.read_excel('GUI/gui_data/MeanPriceZIP.xlsx',
                    sheet_name='Sheet1', engine="openpyxl",index_col=0)
 data['price'] = data['price'].astype(float)
 data['zip_code'] = data['zip_code'].astype(int)
 
-dataR = df = pd.read_excel('GUI/MeanPriceRooms.xlsx',
+dataR = df = pd.read_excel('GUI/gui_data/MeanPriceRooms.xlsx',
                    sheet_name='Sheet1', engine="openpyxl",index_col=0)
 dataR['price'] = dataR['price'].astype(float)
 dataR['rooms'] = dataR['rooms'].astype(float)
