@@ -7,10 +7,10 @@
 \begin{document}
 
 \section{Implementation}
-The whole project can be found in a repository on Github.
+The whole project can be found in a repository on GitHub.
 There the README will provide the necessary information regarding the implementation of the
 scraper as well as how to use the interface.
-All of the files were written and run in python version $3.9.12$.
+All the files were written and run in python version $3.9.12$.
 Below a list of all the packages plus their respective versions that were used can be found.
 
 \begin{itemize}
@@ -25,6 +25,8 @@ Below a list of all the packages plus their respective versions that were used c
     \item \pkg[Tk (tkinter)] - version $0.1.0$
     \item \pkg[Pillow] - version $9.1.1$
 \end{itemize}
+
+
 
 \subsection{Structure of the project}
 { \footnotesize
@@ -67,6 +69,35 @@ Below a list of all the packages plus their respective versions that were used c
         [property\_codes.csv]
         [property\_details.csv]
     ]
+    [\textcolor{blue}{\textit{...Continued on next page}}
+    ]
+]
+\end{forest}
+}
+
+{ \footnotesize
+\begin{forest}
+  for tree={
+    font=\ttfamily,
+    grow'=0,
+    child anchor=west,
+    parent anchor=south,
+    anchor=west,
+    calign=first,
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+    },
+    before typesetting nodes={
+      if n=1
+        {insert before={[,phantom]}}
+        {}
+    },
+    fit=band,
+    before computing xy={l=15pt},
+  }
+[/.
+    [\textcolor{blue}{\textit{...Continued from previous page}}]
     [GUI
         [gui\_data
             [data.xlsx]
@@ -196,7 +227,7 @@ and is assigned to a variable that processes the input and output.
 
 \begin{figure}[htbp]
     \centerline{
-        \includegraphics[width = 85mm]{prog_5.png}}
+        \includegraphics[width = 90mm]{prog_5.png}}
     \caption{Defining an Item}
     \label{fig:itemloader}
 \end{figure}
@@ -248,7 +279,7 @@ This seemingly complicated problem can be resolved quickly with three lines of c
 
 \begin{figure}[htbp]
     \centerline{
-        \includegraphics[width = 85mm]{prog_6.png}}
+        \includegraphics[width = 90mm]{prog_6.png}}
     \caption{Function for fields that are not always present}
     \label{fig:ispresentornot}
 \end{figure}
@@ -265,7 +296,6 @@ By importing the class \pkg[ComparisWebscraperItem] into the \pkg[comparis\_scra
 could be put to use.
 
 \subsection{Implementation of the \ac{gui}}
-
 \subsubsection{Organizing the scraped data}
 The first step to building the \ac{gui} is organizing the data that we obtain from the web scraping.
 For this step we use the same progam than in our parallele data analysis project, named \pkg[cleaning\_database\_\ac{gui}.py].
@@ -285,10 +315,7 @@ We then group the remaining variables, for a given category, such zip code and n
 We save these grouped datasets into two separate excel files, namely \pkg[MeanPriceRooms.xlsx] and \pkg[PricebyZip.xlsx] in the \ac{gui} folder.
 These last datasets will only be used for the graphs.\par
 
-
-\vspace*{5pt}
 \subsubsection{Building the \ac{gui}}
-
 To build the \ac{gui} we created a new program named \pkg[main5.py].
 We first defined what we wanted our \ac{gui} to do. 
 We decided, we wanted the user to be able to search for a property within a certain price range, 
@@ -312,29 +339,60 @@ More graphs could also be displayed to give diverse information to the user.
 \begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
     \begin{scope}[nodes={on chain, join=by line}]
         \node[startstop] (start) {Start};
-        \node[input] (in1) {Load Scraped data};
+        \node[startstop] (in1) {Load Scraped data};
         \node[decision] (dec1) {Is Data Cleaned?};
-        \node[input] (in2) {Start GUI by importing tkinter};
+        \node[startstop] (in2) {Start GUI by importing tkinter};
         \node[process] (pro2a) {link to cleaned dataset};
         \node[process] (pro2) {Format main window};
         \node[process] (pro3) {Format frames as tabs};
         \node[process] (pro4b) {Create functions for each tab};
         \node[process] (pro5) {Define main loop};
         \node[decision] (dec2) {Check GUI is working};
-        \node[input] (in3) {User can search properties};
-        \node[decision] (dec4) {End the program};
+        \node[startstop] (in3) {User can search properties};
+        \node[decision] (dec4) {End the program?};
         \node[startstop] (start1) {End};
         %%%%%%%%%%%%%
     \end{scope}
     \begin{scope}
         \node[process, left=of dec1] (pro1) {Clean and Organize data};
+
         \node[process, left=of dec2] (pro6) {Find bug};
+
         \node[process, left=of dec4] (pro7) {Re-run the program};
-        \draw [->] (dec1) |- (pro1); %{No} missing
-        \draw [->] (dec2) |-  (pro6); %{No} missing
-        \draw [->] (dec4) |-   (pro7); %{No} missing
-        \draw [->] (pro1) |- (pro2);
-        \draw [->] (pro6) |-  (in2);
+
+        
+        \draw [->, left of = dec1] (dec1)  -- node[yshift=0.3cm, text width= 0.2cm]
+                                {\textcolor{red}{No}}
+                                (pro1);
+
+        \draw                   (dec1) -- 
+                                node[yshift=0.1cm, text width= 0.2cm]
+                                {\textcolor{ForestGreen}{Yes}}
+                                (in2);
+
+        \draw [->] (dec2) -- node[yshift=0.5cm, text width= 0.2cm]
+                                {\textcolor{red}{No}}
+                                (pro6);
+        % Yes Node
+        \draw                   (dec2) -- 
+                                node[yshift=0.1cm, text width= 0.2cm]
+                                {\textcolor{ForestGreen}{Yes}}
+                                (in3);
+        % No Node
+        \draw [->, left of=dec4] (dec4) -- 
+                                node[yshift=0.3cm, text width= 0.2cm]
+                                {\textcolor{red}{No}}
+                                (pro7);
+        % Yes Node
+        \draw                   (dec4) -- 
+                                node[yshift=0.1cm, text width= 0.2cm]
+                                {\textcolor{ForestGreen}{Yes}}
+                                (start1);
+
+        \draw [->, left of = dec1] (pro1) |-    (pro2);
+
+        \draw[->, draw = blue] (pro6) |-  (in2);
+        %\draw [->] (pro6) |-  (in2);
         \draw [->] (pro7) |-  (in3);
     \end{scope}
 \end{tikzpicture}
