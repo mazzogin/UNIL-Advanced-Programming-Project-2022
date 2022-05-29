@@ -29,6 +29,12 @@ Below a list of all the packages plus their respective versions that were used c
 
 
 \subsection{Structure of the project}
+For reference we display the structure of the project below.
+Files and directories that do not affect the project directly (such as \pkg[.tex] files)
+were not included in the tree.
+All of the files in the \pkg[Comparis\_Webscraper] directores except for the ones within the \pkg[spiders]
+were set up by \pkg[Scrapy] by default when creating the \pkg[spider].
+
 { \footnotesize
 \begin{forest}
   for tree={
@@ -51,8 +57,8 @@ Below a list of all the packages plus their respective versions that were used c
     before computing xy={l=15pt},
   }
 [/.
-    [comparis\_webscraper
-        [comparis\_webscraper
+    [Comparis\_Webscraper
+        [Comparis\_Webscraper
             [spiders
                 [comparis\_scraper.py]
                 [property\_code\_scraper.py]
@@ -124,12 +130,12 @@ Below a list of all the packages plus their respective versions that were used c
 \subsection{Implementation of the Web Scraper}
 \label{implementationscraper}
 As mentioned previously, the web scraping was done by utilizing two different tools, \pkg[Scrapy] and \pkg[Selenium].
-When programming the spider, the main challenge was to implement the vision of what it should do. 
-When called, the spider should be able to do the following:
+When programming the \pkg[spider], the main challenge was to implement the vision of what it should do. 
+When called, the \pkg[spider] should be able to do the following:
 \begin{enumerate}
     \item Activate the browser via \hspace*{-6pt} \pkg[Selenium]
     \item Access a list of predefined \acsp*{url}
-    \item Loop through every \acs*{url} and activate the \js
+    \item Loop through every \acs*{url} and activate the \jss
     \item Download $22$ datapoints from several locations on the website
     \begin{itemize}
         \item If not available, no value was returned
@@ -140,7 +146,7 @@ When called, the spider should be able to do the following:
     \pkg[.csv] file with the download date in the name
 \end{enumerate}
 
-Before explaining how the main spider (\pkg[property\_scraper]) was built,
+Before explaining how the main spider \pkg[(property\_scraper)] was built,
 we provide a brief explanation of how the \acs*{url} of every single property 
 was obtained without getting \acs*{ip}-blocked.
 
@@ -152,7 +158,7 @@ creative problem solving and a lot of trial and error.
 Obtaining all the property \acsp*{url} was a clear example of this.
 
 Although on a smaller scale, 
-it also required a combination of \pkg[Scrapy] and \pkg[Selenium] in order to trigger the JavaScriptss.
+it also required a combination of \pkg[Scrapy] and \pkg[Selenium] in order to trigger the JavaScripts.
 
 When a user runs a search on Comparis (e.g. for a house for purchase in a specific location), 
 the website will filter through \textbf{all} the listings and return the corresponding properties.
@@ -170,8 +176,9 @@ in the search field.
 
 From there on, \pkg[Selenium] will pass the "current state" (i.e. state of \acs*{html} after \js manipulation)
 to the spider for the analysis.
-The spider then yields the ID's and creates \acsp*{url} by adding them to the end of the path component of the \acs*{url}
-(which is how Comparis refers to their detail pages).
+The spider then yields the ID's and creates \acsp*{url} by adding them to the end of the \textbf{path component} 
+(figure \ref{fig:htmlstructure}) of the \acs*{url}  using an f-string.
+This is how Comparis refers to their detail pages.
 The data is subsequently saved as \pkg[.csv] to the "data" folder under the name \pkg[property\_codes\_YYYYMMDD.csv].
 Adding the current date to the name is necessary with regards to the possibility 
 of creating a database that scrapes the web regularly for available real estate.
@@ -196,9 +203,9 @@ The following lines will explain how this goal was reached.
 Given that the spider is a class, the user needs to define its methods. 
 The \pkg[def \_\_init\_\_()] method is not required, since the \pkg[scrapy.Spider] inherits it already 
 from its parent class.
-Following the outline given in section \ref{implementationscraper},
+Following the outline given at the beginning of this section \ref{implementationscraper},
 a browser window using  \pkg[Selenium] is opened.
-Using a \pkg[for] loop, the \acsp*{url} in \pkg[property\_codes.csv] are passed to \pkg[Selenium],
+Using a \pkg[for] loop, the \acsp*{url} in \pkg[property\_codes.csv] are passed to \pkg[Selenium,]
 which navigates to every single website and scrolls to the bottom of the page to, again, activate the \jss.
 From there on, the source code is passed to the \pkg[ItemLoader] which processes the $22$ required fields.
 The data is yielded all at once and put into a \pkg[.csv] file (again along with the current date).
@@ -246,7 +253,7 @@ As a consequence the \pkg[ItemLoader] is created.
 \pkg[Scrapy] provides the user with six different input processors,
 including  \pkg[MapCompose()] which was used extensively.
 These work like normal functions \cite{sDemystifyingScrapyItem2020}.
-If need be, custom functions can be added, which was also done extensively in this project.
+If need be, custom functions can be added, which was also done numerous times in this project.
 
 For illustration purposes we provide figure \ref{fig:itemloader}. 
 There the definition of a field in the \pkg[ItemLoader] can be seen in action.
@@ -268,14 +275,23 @@ When scraping the field "address" (scenario $1$ applies) several input- and outp
 The input processor is primarily \pkg[MapCompose()] and \pkg[remove\_tags.]
 The latter is technically a function and is imported from the \pkg[w3lib.html] library.
 In figure \ref{fig:itemloader} \pkg[remove\_string] and  \pkg[remove\_comma] can also be seen.
+
+\begin{figure}[htbp]
+    \centerline{
+        \includegraphics[width = 85mm]{prog_18.png}}
+    \caption{Function for fields that are not always present}
+    \label{fig:remove_string}
+\end{figure}
+
 They are instances of custom functions that were defined manually 
 in the \pkg[items.py] file during the process of scraping.
 As with the \pkg[remove\_tags] they can then be passed to the \pkg[MapCompose()] processor.
 This worked very well for fields which were always present (i.e. price, address, square meters etc.).
 
-However, how does one deal with fields that are not always present
-(e.g. fields that state whether the apartment is equipped with a washing machine or not)?
-This seemingly complicated problem can be resolved quickly with three lines of code:
+Fields that are not always present
+(e.g. fields that state whether the apartment is equipped with a washing machine or not)
+present an additional challenge  when scraping.
+This seemingly complicated problem can be resolved quickly with a few lines of code:
 
 \begin{figure}[htbp]
     \centerline{
@@ -286,43 +302,43 @@ This seemingly complicated problem can be resolved quickly with three lines of c
 
 Here the properties of both the XPATH and the functions are leveraged.
 The XPATH of a given field, for example the one for the "elevator" field, 
-will only return a result when it finds the keyword "Ascenseur" within a specific range of the \acs*{html}.
+will only return a result when it finds the keyword "\textit{Ascenseur}" within a specific range of the \acs*{html}.
 Given this property of the XPATH and given that the keywords are always the same, 
 it is natural to write a function that can evaluate this binary problem.
 The function in figure \ref{fig:ispresentornot} returns \pkg[True] when the keyword is found,
-and an empty value (\pkg[N/A]) otherwise.
+and an empty value \pkg[(N/A)] otherwise.
 
 By importing the class \pkg[ComparisWebscraperItem] into the \pkg[comparis\_scraper.py] file, the \pkg[ItemLoader] 
 could be put to use.
 
 \subsection{Implementation of the \ac{gui}}
 \subsubsection{Organizing the scraped data}
-The first step to building the \ac{gui} is organizing the data that we obtain from the web scraping.
-For this step we use the same progam than in our parallele data analysis project, named \pkg[cleaning\_database\_\ac{gui}.py].
+The first step to building the \ac{gui} is organizing the data that was obtained from the scraping.
+For this step we use the same program as in our sister project in "Advanced Data Analysis", named \pkg[cleaning\_database\_\ac{gui}.py].
 We first analyze the two separate datasets that we obtained from the scraping. 
 These are named \pkg[property\_codes.csv] and \pkg[property\_details.csv].
 We analyze them by printing the headings and the description to check the data and the types.
 We then merge them. After this, we sort through the values, removing all the missing variables and errors. 
 We create dummy variables for the variables that might be interesting for graphs or regression analysis.
-We then proceed to split the address from the zip code, to get the zip code in a separate column. 
-We do this as we do not have precise addresses and we want to be able to search properties within a certain zip code. 
+We then proceed to split the address from the ZIP code, to get the ZIP code in a separate column. 
+We do this as we do not have precise addresses and we want to be able to search properties within a certain ZIP code. 
 Finally, we drop the variables that are not needed and save the sorted data into the excel file \pkg[/\ac{gui}/data.xlsx].
 This will be the dataset we use for our \ac{gui} program. \par
 We also create a short program named \pkg[graphs\_\ac{gui}/.py] to prepare the data for the graphs 
 we will want to display on the interface. We use the excel file we have just created named \pkg[data.xlsx].
 We first drop all the variables we do not want to keep. 
-We then group the remaining variables, for a given category, such zip code and number of rooms, by average price.
+We then group the remaining variables, for a given category, such as ZIP code and number of rooms, by average price.
 We save these grouped datasets into two separate excel files, namely \pkg[MeanPriceRooms.xlsx] and \pkg[PricebyZip.xlsx] in the \ac{gui} folder.
 These last datasets will only be used for the graphs.\par
 
 \subsubsection{Building the \ac{gui}}
 To build the \ac{gui} we created a new program named \pkg[main5.py].
-We first defined what we wanted our \ac{gui} to do. 
+We first defined what the \ac{gui} was supposed to do.
 We decided, we wanted the user to be able to search for a property within a certain price range, 
-or with a specific number of rooms or within a specific zip code. We also wanted to display graphs for general information.
+or with a specific number of rooms or within a specific ZIP code. We also wanted to display graphs for general information.
 Thefore to build this \ac{gui} we needed to have different tabs to search for these separately.
 We also needed to be able to clear the search to be able to run the program multiple times. \par
-To start the program that will create the interface, we start by defining the characteristics of the root widget otherwise known the main window,
+To start the program that will create the interface, we start by defining the characteristics of the root widget otherwise referred to as the main window,
 such as height, width and title. We then add the notebook instance to add tabs to the interface.
 In \pkg[tkinter], these are knows as frame widgets. From there, we format the frames and add the labels, entries and buttons we wish to have in each tab. 
 For the formatting we chose to use the grid method. This defines the place of each item, also called widget, within the frame based on colums and rows.
@@ -331,71 +347,75 @@ We then add the scrollbar to the root window to be able to scroll through the re
 We also add a treeview instance so that the pulled data from the dataset is displayed in a hierarchical and tabular structure. 
 Finally we define the functions. We use three main functions, one to search through the database and retrieve the data to the interface. 
 The second function to clear the search and delete the displayed data. The last function creates and displays the graphs. 
-Each function is adapted to the chosen variable, such as price, number of rooms or zipcode, to display the correct information \par
+Each function is adapted to the chosen variable, such as price, number of rooms or ZIP code to display the correct information.\par
 This is a very basic \ac{gui} to make it easier for the user to interact with the scraped data.
 The aim would be to develop the interface to handle searches that are more complex, such as conditional searches with more than one characteristic.
 More graphs could also be displayed to give diverse information to the user. 
+See the outlined workflow as a flowchart on the right-hand side in figure \ref{fig:flowchart1}.
 
-\begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
-    \begin{scope}[nodes={on chain, join=by line}]
-        \node[startstop] (start) {Start};
-        \node[startstop] (in1) {Load Scraped data};
-        \node[decision] (dec1) {Is Data Cleaned?};
-        \node[startstop] (in2) {Start GUI by importing tkinter};
-        \node[process] (pro2a) {link to cleaned dataset};
-        \node[process] (pro2) {Format main window};
-        \node[process] (pro3) {Format frames as tabs};
-        \node[process] (pro4b) {Create functions for each tab};
-        \node[process] (pro5) {Define main loop};
-        \node[decision] (dec2) {Check GUI is working};
-        \node[startstop] (in3) {User can search properties};
-        \node[decision] (dec4) {End the program?};
-        \node[startstop] (start1) {End};
-        %%%%%%%%%%%%%
-    \end{scope}
-    \begin{scope}
-        \node[process, left=of dec1] (pro1) {Clean and Organize data};
+\begin{figure}
+    \begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
+        \begin{scope}[nodes={on chain, join=by line}]
+            \node[startstop] (start) {Start};
+            \node[startstop] (in1) {Load Scraped data};
+            \node[decision] (dec1) {Is Data Cleaned?};
+            \node[startstop] (in2) {Start GUI by importing tkinter};
+            \node[process] (pro2a) {link to cleaned dataset};
+            \node[process] (pro2) {Format main window};
+            \node[process] (pro3) {Format frames as tabs};
+            \node[process] (pro4b) {Create functions for each tab};
+            \node[process] (pro5) {Define main loop};
+            \node[decision] (dec2) {Check GUI is working};
+            \node[startstop] (in3) {User can search properties};
+            \node[decision] (dec4) {End the program?};
+            \node[startstop] (start1) {End};
+            %%%%%%%%%%%%%
+        \end{scope}
+        \begin{scope}
+            \node[process, left=of dec1] (pro1) {Clean and Organize data};
 
-        \node[process, left=of dec2] (pro6) {Find bug};
+            \node[process, left=of dec2] (pro6) {Find bug};
 
-        \node[process, left=of dec4] (pro7) {Re-run the program};
+            \node[process, left=of dec4] (pro7) {Re-run the program};
 
-        
-        \draw [->, left of = dec1] (dec1)  -- node[yshift=0.3cm, text width= 0.2cm]
-                                {\textcolor{red}{No}}
-                                (pro1);
+            
+            \draw [->, left of = dec1] (dec1)  -- node[yshift=0.3cm, text width= 0.2cm]
+                                    {\textcolor{red}{No}}
+                                    (pro1);
 
-        \draw                   (dec1) -- 
-                                node[yshift=0.1cm, text width= 0.2cm]
-                                {\textcolor{ForestGreen}{Yes}}
-                                (in2);
+            \draw                   (dec1) -- 
+                                    node[yshift=0.1cm, text width= 0.2cm]
+                                    {\textcolor{ForestGreen}{Yes}}
+                                    (in2);
 
-        \draw [->] (dec2) -- node[yshift=0.5cm, text width= 0.2cm]
-                                {\textcolor{red}{No}}
-                                (pro6);
-        % Yes Node
-        \draw                   (dec2) -- 
-                                node[yshift=0.1cm, text width= 0.2cm]
-                                {\textcolor{ForestGreen}{Yes}}
-                                (in3);
-        % No Node
-        \draw [->, left of=dec4] (dec4) -- 
-                                node[yshift=0.3cm, text width= 0.2cm]
-                                {\textcolor{red}{No}}
-                                (pro7);
-        % Yes Node
-        \draw                   (dec4) -- 
-                                node[yshift=0.1cm, text width= 0.2cm]
-                                {\textcolor{ForestGreen}{Yes}}
-                                (start1);
+            \draw [->] (dec2) -- node[yshift=0.5cm, text width= 0.2cm]
+                                    {\textcolor{red}{No}}
+                                    (pro6);
+            % Yes Node
+            \draw                   (dec2) -- 
+                                    node[yshift=0.1cm, text width= 0.2cm]
+                                    {\textcolor{ForestGreen}{Yes}}
+                                    (in3);
+            % No Node
+            \draw [->, left of=dec4] (dec4) -- 
+                                    node[yshift=0.3cm, text width= 0.2cm]
+                                    {\textcolor{red}{No}}
+                                    (pro7);
+            % Yes Node
+            \draw                   (dec4) -- 
+                                    node[yshift=0.1cm, text width= 0.2cm]
+                                    {\textcolor{ForestGreen}{Yes}}
+                                    (start1);
 
-        \draw [->, left of = dec1] (pro1) |-    (pro2);
+            \draw [->, left of = dec1] (pro1) |-    (pro2);
 
-        \draw[->, draw = blue] (pro6) |-  (in2);
-        %\draw [->] (pro6) |-  (in2);
-        \draw [->] (pro7) |-  (in3);
-    \end{scope}
-\end{tikzpicture}
+            \draw[->, draw = blue] (pro6) |-  (in2);
+            %\draw [->] (pro6) |-  (in2);
+            \draw [->] (pro7) |-  (in3);
+        \end{scope}
+    \end{tikzpicture}
 
+\caption{Workflow for Using the \acs*{gui}} \label{fig:flowchart1}
+\end{figure}
 
 \end{document}

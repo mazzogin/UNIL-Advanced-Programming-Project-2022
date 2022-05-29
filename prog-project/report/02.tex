@@ -6,7 +6,7 @@
 
 \section{Methodology}
 A big difference between real estate and other publicly traded assets is that there is no centralized platform where offers can be tracked. 
-In the case of asset classes such as bonds and equity this service is provided by multiple sources such as Bloomberg, Refinitiv and Morningstar.
+In the case of asset classes such as bonds and equity this service is provided by multiple providers such as Bloomberg, Refinitiv and Morningstar.
 Historical prices, key financial data, plots and proxies are all available on one single platform.
 Something similar is missing for the Swiss real estate market. 
 
@@ -29,8 +29,8 @@ a buyer might not find his ideal new property, simply by searching on the wrong 
 
 An attempt at creating a more transparent and efficient real estate market was made by Comparis. 
 On their website, listings from many sources are aggregated and displayed according to their key characteristics.
-However, also \verb|www.comparis.ch| does not offer tools for further analysis and does not readily display historical data,
-except for increases or decreases in the price in percentage.
+However, also \verb|www.comparis.ch| does not offer tools for further analysis and does not readily display historical data 
+for specific properties, except for increases or decreases in the listing price in percentage.
 
 For the purpose of creating a database which provides a user with information on as many properties in a given area as possible, 
 \verb|www.comparis.ch| is the ideal target for scraping data.
@@ -39,7 +39,7 @@ For the purpose of creating a database which provides a user with information on
 \subsection{Web Scraping}
 
 When creating a web scraping application in python, there are a number of packages and tools to choose from.
-The modules include, but are not limited to\pkg[requests]\hspace*{-10pt},
+The modules include, but are not limited to\pkg[requests,]
 \pkg[BeautifulSoup],\pkg[Scrapy]and last but not least,\pkg[Selenium.]
 Each come with their advantages and disadvantages. 
 The former two modules,\pkg[requests] and\pkg[BeautifulSoup] both come with the bonus of ease of use.
@@ -58,7 +58,7 @@ but also the information on the detail page of every single \acs*{url}.
 \end{figure}
 
 The need for more data was not the only factor that led to this choice.
-Today's websites are populated with \js's that procedurally generate the content a user can see.
+Today's websites are populated with \js's that procedurally generate the content a user can see (and a scraper can scrape).
 The \js's may load further information based on simple actions such as scrolling on the page,
 clicking a button, or by more complex actions such as hovering over a certain area or logging in somewhere.
 
@@ -98,7 +98,7 @@ and generates an output based on the user's preference.
 \pkg[Scrapy] can send many requests to a website at once, 
 thus speeding up the data gathering process tremendously (by default\pkg[Scrapy]sends around $16$ requests a time).
 However, even when using all the request headers that a normal browser sends to a website, 
-the\pkg[Scrapy] spider's were constantly \acs*{ip}-blocked.
+the\pkg[Scrapy] spiders were constantly \acs*{ip}-blocked.
 
 \begin{figure}[htbp]
     \centerline{
@@ -110,9 +110,9 @@ the\pkg[Scrapy] spider's were constantly \acs*{ip}-blocked.
 \subsection{Selenium}
 Whilst\pkg[Scrapy] works well with extracting data from the website's source code (especially using \acsp*{xpath}'s), 
 it is still not possible to navigate \js heavy websites and trigger the scripts that give access to the important information in the source code.
-Furthermore, even with the implementation of rotating proxies in\pkg[Scrapy], the \acs*{ip}-block could not be circumvented.
+Furthermore, even with the implementation of rotating proxies in\pkg[Scrapy,]\hspace{-5pt}the \acs*{ip}-block could not be circumvented.
 
-This is where\pkg[Selenium] comes in:\pkg[Selenium] allows a user to control any browser environment,
+This is where\pkg[Selenium]\hspace{-5pt}comes in:\pkg[Selenium] allows a user to control any browser environment,
 provided the corresponding driver has been installed.
 Controlling a browser offers several advantages, the primary advantage being that the request comes from an actual browser,
 which means it will very rarely get blocked. 
@@ -127,9 +127,10 @@ reliable data gathering on the one hand, and clean data extraction on the other 
 
 \subsection{User platform}
 To make the dataset scraped from Comparis more user-friendly we decided to build a \ac{gui}.
-This way the user will be able to search for a property within a certain price range, zip code or with specific features, 
+This way the user will be able to search for a property within a certain price range, ZIP code or with specific features, 
 instead of having to go through the full scraped dataset.
-We used the open source library\pkg[tkinter] \ref{TkinterPythonInterface} to model the GUI. We chose this library as it is pre-installed in python.
+We used the open source library\pkg[tkinter] \cite{TkinterPythonInterface} 
+to model the GUI. We chose this library as it is pre-installed in python.
 Moreover it is stable and flexible and provides simple syntax.
 \pkg[tkinter] is the perfect tool for this first prototype. However, if the project grows\pkg[tkinter] will not be powerful enough,
 therefore we recommend switching to PyQT another \ac{gui} or even REACT for a more professional look. 
