@@ -26,7 +26,6 @@
 - [Getting Started](#getting_started)
 - [Deployment](#deployment)
 - [Usage](#usage)
-- [Built Using](#built_using)
 - [TODO](TODO.md)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
@@ -40,69 +39,71 @@ This project serves three purposes:
 3. Provide data for our sister project. Find more information regarding the latter project [here](https://github.com/mazzogin/UNIL-Advanced-Data-Analysis-Project-2022)
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
-What things you need to install the software and how to install them.
+You will need to use the following `python` packages:
 
 ```
-Give examples
+Scrapy
+Selenium
+Webdriver_manager
+Numpy
+Pandas
+Openpyxl
+Tk (tkinter)
+Pillow
 ```
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
+In your virtual environment, install the following libraries:
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+pip install scrapy
+pip install selenium
+pip install webdriver-manager
+pip install webdriver_manager
+pip install numpy
+pip install pandas
+pip install openpyxl
+pip install tkinter
+pip install pillow
 ```
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+This project is divided up into two parts:
+1. Obtaining the data with two separate web scrapers (output = 2 .csv files)
+2. Displaying the data with an interactive interface
+
+### Important Note
+In order for you to run the interface, you do not have to download the data.
+a) An example dataset is provided, called `dataset.xlsx`
+b) `dataset.xlsx` was set up using data that was obtained from the scraping
+
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+### Executing the web scraper: The whole process
+The web scraping process is the following:
+1. Go to [comparis.ch]([https://github.com/mazzogin/UNIL-Advanced-Data-Analysis-Project-2022](https://fr.comparis.ch/immobilien/default))
+2. Select the region of interest (in this case simply "Lausanne")
+3. Enter
+4. To get our settings: on the listings page, select "Rayon": "10k" (see [here]([[https://github.com/mazzogin/UNIL-Advanced-Data-Analysis-Project-2022](https://fr.comparis.ch/immobilien/default](https://fr.comparis.ch/immobilien/result/list?requestobject=%7B%22DealType%22%3A20%2C%22SiteId%22%3A0%2C%22RootPropertyTypes%22%3A%5B%5D%2C%22PropertyTypes%22%3A%5B%5D%2C%22RoomsFrom%22%3Anull%2C%22RoomsTo%22%3Anull%2C%22FloorSearchType%22%3A0%2C%22LivingSpaceFrom%22%3Anull%2C%22LivingSpaceTo%22%3Anull%2C%22PriceFrom%22%3Anull%2C%22PriceTo%22%3Anull%2C%22ComparisPointsMin%22%3A0%2C%22AdAgeMax%22%3A0%2C%22AdAgeInHoursMax%22%3Anull%2C%22Keyword%22%3A%22%22%2C%22WithImagesOnly%22%3Anull%2C%22WithPointsOnly%22%3Anull%2C%22Radius%22%3A%2210%22%2C%22MinAvailableDate%22%3A%221753-01-01T00%3A00%3A00%22%2C%22MinChangeDate%22%3A%221753-01-01T00%3A00%3A00%22%2C%22LocationSearchString%22%3A%22Lausanne%22%2C%22Sort%22%3A11%2C%22HasBalcony%22%3Afalse%2C%22HasTerrace%22%3Afalse%2C%22HasFireplace%22%3Afalse%2C%22HasDishwasher%22%3Afalse%2C%22HasWashingMachine%22%3Afalse%2C%22HasLift%22%3Afalse%2C%22HasParking%22%3Afalse%2C%22PetsAllowed%22%3Afalse%2C%22MinergieCertified%22%3Afalse%2C%22WheelchairAccessible%22%3Afalse%2C%22LowerLeftLatitude%22%3Anull%2C%22LowerLeftLongitude%22%3Anull%2C%22UpperRightLatitude%22%3Anull%2C%22UpperRightLongitude%22%3Anull%7D)))
+5. From this search/link the URL's for all the listings can be scraped, using the `property_code_scraper.py` in directory `Comparis_Webscraper/Comparis_Webscraper/spiders/`
+6. Navigate to the `property_code_scraper.py` and manually enter the URL in `line 46`
+7. In your `terminal`, navigate to the directory `Comparis_Webscraper/Comparis_Webscraper/spiders/`
+8. Also in your `terminal`, enter `scrapy crawl id-scraper`
+9. The output of the `id-scraper` spider will consist of one `.csv` file named `property-codes-YYYYMMDD.csv` which is placed in the `data` folder
+11. To scrape every single URL in `property-codes-YYYYMMDD.csv` navigate to the second web scraper called `comparis_scraper.py`.
+12. In `line 49, col 91`, change the YYYYMMDD component of the filename if you do not want to use the default one
+13. Save the file
+14. In your `terminal`, enter `scrapy crawl property-scraper`
+15. Wait ~80 minutes, or look at the default dataset in `data` called `property_details`
+16. 
 
-## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+
+
+### Executing the interface
 
 ## ✍️ Authors <a name = "authors"></a>
 
