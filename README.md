@@ -3,7 +3,7 @@
  <img width=200px height=200px src="https://gifimage.net/wp-content/uploads/2017/11/its-free-real-estate-gif-1.gif" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Project Title</h3>
+<h3 align="center">Real Transparency in Real Estate</h3>
 
 <div align="center">
 
