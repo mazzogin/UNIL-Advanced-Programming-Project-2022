@@ -76,8 +76,8 @@ This project is divided up into two parts:
 
 ### Important Note
 In order for you to run the interface, you do not have to download the data.
-a) An example dataset is provided, called `dataset.xlsx`
-b) `dataset.xlsx` was set up using data that was obtained from the scraping
+1. An example dataset is provided, called `dataset.xlsx`
+2. `dataset.xlsx` was set up using data that was obtained from the scraping
 
 
 ## 🚀 Deployment <a name = "deployment"></a>
@@ -92,28 +92,26 @@ The web scraping process is the following:
 6. Navigate to the `property_code_scraper.py` and manually enter the URL in `line 46`
 7. In your `terminal`, navigate to the directory `Comparis_Webscraper/Comparis_Webscraper/spiders/`
 8. Also in your `terminal`, enter `scrapy crawl id-scraper`
-9. The output of the `id-scraper` spider will consist of one `.csv` file named `property-codes-YYYYMMDD.csv` which is placed in the `data` folder
+9. The output of the `id-scraper` spider will consist of one `.csv` file named `property-codes_YYYYMMDD.csv` which is placed in the `data` folder
 11. To scrape every single URL in `property-codes-YYYYMMDD.csv` navigate to the second web scraper called `comparis_scraper.py`.
 12. In `line 49, col 91`, change the YYYYMMDD component of the filename if you do not want to use the default one
 13. Save the file
 14. In your `terminal`, enter `scrapy crawl property-scraper`
-15. Wait ~80 minutes, or look at the default dataset in `data` called `property_details`
-16. 
-
-
-
+15. Wait ~80 minutes, or simply look at the default dataset in `data` called `property_details`
+16. The scraper `property_details` will put a file called `property_details_YYYYMMDD.csv` into the data folder
 
 ### Executing the interface
 
+
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@zoegiacomi]([https://github.com/kylelobo](https://github.com/zoegiacomi)) - Interface, Text and Description
 
 See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-- Hat tip to anyone whose code was used
+- Hat tip to anyone whose code was used 
 - Inspiration
 - References
 
