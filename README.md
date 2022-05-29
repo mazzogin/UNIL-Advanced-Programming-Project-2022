@@ -108,7 +108,7 @@ The web scraping process is the following:
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@zoegiacomi](https://github.com/kylelobo](https://github.com/zoegiacomi) - Interface, Text and Description
+- [@zoegiacomi](https://github.com/zoegiacomi) - Interface, Text and Description
 - [@notoriousemi](https://github.com/notoriousemi) - Writing the text, editing the video and helping where it was needed
 
 
