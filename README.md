@@ -104,7 +104,17 @@ The web scraping process is the following:
 16. The scraper `property_details` will put a file called `property_details_YYYYMMDD.csv` into the data folder
 
 ### Executing the interface
-1. 
+# If dataset was webscrapped start from 1 if not start from 4.
+1. Open the `cleaning_database_GUI.py` file.
+2. Check that the paths correspond to the scrapped data csv files
+3. Run the `cleaning_database_GUI.py` which should produce the `database.xlsx` file
+4. Open `graphs_GUI.py` Check the corresponding paths
+5. Run `graphs_GUI.py`. This should create two new excels : `MeanPriceRoom.xlsx`and `MeanPriceZIP.xlsx`
+6. Open the `main5.py`file
+7. Check the path correspond to the full dataset in line 146.
+8. Check the paths for the graphs, line 150 corresponds to `MeanPriceZIP.xlsx` and line 155 to `MeanPriceRoom.xlsx`
+9. Save
+10. In the terminal enter `python3 main5.py`
 
 ## ✍️ Authors <a name = "authors"></a>
 
