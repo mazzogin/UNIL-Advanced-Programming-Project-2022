@@ -16,7 +16,7 @@
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center">
       
   Real estate has been for a long time an opaque, decentralized market. As such, the Swiss housing market is subject to information asymmetry between buyers and sellers, creating potential adverse selection. The housing market is dominated by real estate agents who possess more information than potential buyers which contributes to skewing the price of houses.
     Though transparency has positively evolved with the apparition of the internet and online properties platforms, there is still a lack of publicly available historical data and comparative databases.
