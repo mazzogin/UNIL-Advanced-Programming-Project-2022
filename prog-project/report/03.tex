@@ -351,7 +351,7 @@ Each function is adapted to the chosen variable, such as price, number of rooms 
 This is a very basic \ac{gui} to make it easier for the user to interact with the scraped data.
 The aim would be to develop the interface to handle searches that are more complex, such as conditional searches with more than one characteristic.
 More graphs could also be displayed to give diverse information to the user. 
-See the outlined workflow as a flowchart on the right-hand side in figure \ref{fig:flowchart1}.
+See the outlined workflow as a flowchart on the right hand side in figure \ref{fig:flowchart1}.
 
 \begin{figure}
     \begin{tikzpicture}[auto, node distance = 4mm and 6mm, start chain = going below]
@@ -378,7 +378,7 @@ See the outlined workflow as a flowchart on the right-hand side in figure \ref{f
 
             \node[process, left=of dec4] (pro7) {Re-run the program};
 
-            
+            % NO Thingy
             \draw [->, left of = dec1] (dec1)  -- node[yshift=0.3cm, text width= 0.2cm]
                                     {\textcolor{red}{No}}
                                     (pro1);
@@ -407,9 +407,9 @@ See the outlined workflow as a flowchart on the right-hand side in figure \ref{f
                                     {\textcolor{ForestGreen}{Yes}}
                                     (start1);
 
-            \draw [->, left of = dec1] (pro1) |-    (pro2);
+            \draw [->, left of = dec1] (pro1) |-    (in1);
 
-            \draw[->, draw = blue] (pro6) |-  (in2);
+            \draw[->] (pro6) |-  (in2);
             %\draw [->] (pro6) |-  (in2);
             \draw [->] (pro7) |-  (in3);
         \end{scope}
