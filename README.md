@@ -78,7 +78,7 @@ This project is divided up into two parts:
 2. Displaying the data with an interactive interface
 
 ### Important Note
-In order for you to run the interface, you do not have to download the data.
+In order for you to run the interface, you do not have to scrape the data.
 1. An example dataset is provided, called `dataset.xlsx`
 2. `dataset.xlsx` was set up using data that was obtained from the scraping
 
